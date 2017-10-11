@@ -1,6 +1,6 @@
 # yii2-auth
 
-This project is complete copy of [dektrium/yii2-user](https://github.com/dektrium/yii2-user) and intented to be used specificly on our projects.
+This project is complete copy of [dektrium/yii2-auth](https://github.com/dektrium/yii2-auth) and intented to be used specificly on our projects.
 
 ## Documentation
 
