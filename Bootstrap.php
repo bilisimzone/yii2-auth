@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\user;
+namespace coreb2c\auth;
 
 use Yii;
 use yii\authclient\Collection;
@@ -27,16 +27,16 @@ class Bootstrap implements BootstrapInterface
 {
     /** @var array Model's map */
     private $_modelMap = [
-        'User'             => 'coreb2c\user\models\User',
-        'Account'          => 'coreb2c\user\models\Account',
-        'Profile'          => 'coreb2c\user\models\Profile',
-        'Token'            => 'coreb2c\user\models\Token',
-        'RegistrationForm' => 'coreb2c\user\models\RegistrationForm',
-        'ResendForm'       => 'coreb2c\user\models\ResendForm',
-        'LoginForm'        => 'coreb2c\user\models\LoginForm',
-        'SettingsForm'     => 'coreb2c\user\models\SettingsForm',
-        'RecoveryForm'     => 'coreb2c\user\models\RecoveryForm',
-        'UserSearch'       => 'coreb2c\user\models\UserSearch',
+        'User'             => 'coreb2c\auth\models\User',
+        'Account'          => 'coreb2c\auth\models\Account',
+        'Profile'          => 'coreb2c\auth\models\Profile',
+        'Token'            => 'coreb2c\auth\models\Token',
+        'RegistrationForm' => 'coreb2c\auth\models\RegistrationForm',
+        'ResendForm'       => 'coreb2c\auth\models\ResendForm',
+        'LoginForm'        => 'coreb2c\auth\models\LoginForm',
+        'SettingsForm'     => 'coreb2c\auth\models\SettingsForm',
+        'RecoveryForm'     => 'coreb2c\auth\models\RecoveryForm',
+        'UserSearch'       => 'coreb2c\auth\models\UserSearch',
     ];
 
     /** @inheritdoc */
@@ -66,7 +66,7 @@ class Bootstrap implements BootstrapInterface
             ]);
 
             if ($app instanceof ConsoleApplication) {
-                $module->controllerNamespace = 'coreb2c\user\commands';
+                $module->controllerNamespace = 'coreb2c\auth\commands';
             } else {
                 Yii::$container->set('yii\web\User', [
                     'enableAutoLogin' => true,
@@ -103,7 +103,7 @@ class Bootstrap implements BootstrapInterface
                 ];
             }
 
-            Yii::$container->set('coreb2c\user\Mailer', $module->mailer);
+            Yii::$container->set('coreb2c\auth\Mailer', $module->mailer);
 
             $module->debug = $this->ensureCorrectDebugSetting();
         }

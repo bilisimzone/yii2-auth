@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\user;
+namespace coreb2c\auth;
 
-use coreb2c\user\models\Token;
-use coreb2c\user\models\User;
+use coreb2c\auth\models\Token;
+use coreb2c\auth\models\User;
 use Yii;
 use yii\base\Component;
 
@@ -44,7 +44,7 @@ class Mailer extends Component
     /** @var string */
     protected $recoverySubject;
 
-    /** @var \coreb2c\user\Module */
+    /** @var \coreb2c\auth\Module */
     protected $module;
 
     /**

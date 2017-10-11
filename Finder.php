@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\user;
+namespace coreb2c\auth;
 
-use coreb2c\user\models\query\AccountQuery;
-use coreb2c\user\models\Token;
+use coreb2c\auth\models\query\AccountQuery;
+use coreb2c\auth\models\Token;
 use yii\authclient\ClientInterface;
 use yii\base\Object;
 use yii\db\ActiveQuery;
