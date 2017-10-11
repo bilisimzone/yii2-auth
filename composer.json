@@ -1,12 +1,12 @@
 {
-    "name": "coreb2c/yii2-user",
+    "name": "coreb2c/yii2-auth",
     "description": "Flexible user registration and authentication module for Yii2",
-    "keywords": ["yii2", "yii2-user", "user management", "coreb2c"],
+    "keywords": ["yii2", "yii2-auth", "user management", "coreb2c"],
     "type": "yii2-extension",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/coreb2c/yii2-user/issues?state=open",
-        "source": "https://github.com/coreb2c/yii2-user"
+        "issues": "https://github.com/coreb2c/yii2-auth/issues?state=open",
+        "source": "https://github.com/coreb2c/yii2-auth"
     },
     "authors": [
         {

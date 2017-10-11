@@ -14,7 +14,7 @@ namespace coreb2c\user;
 use yii\base\Module as BaseModule;
 
 /**
- * This is the main module class for the Yii2-user.
+ * This is the main module class for the yii2-auth.
  *
  * @property array $modelMap
  *

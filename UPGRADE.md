@@ -1,11 +1,11 @@
-Upgrading instructions for Yii2-user
+Upgrading instructions for yii2-auth
 ====================================
 
 The following upgrading instructions are cumulative. That is, if you want to
 upgrade from version A to version C and there is version B between A and C, you
 need to following the instructions for both A and B.
 
-Upgrade from Yii2-user 0.9.* to Yii2-user 0.9.4
+Upgrade from yii2-auth 0.9.* to yii2-auth 0.9.4
 
 - New authentication via social networks has been introduced. You should update
 your `authClientCollection` component as described in [guide](docs/social-auth.md).
@@ -13,7 +13,7 @@ your `authClientCollection` component as described in [guide](docs/social-auth.m
 - Admin views have been remade. If you override admin view files, you should
 update them accordingly to the made changes.
 
-Upgrade from Yii2-user 0.8.*
+Upgrade from yii2-auth 0.8.*
 ----------------------------
 
 - **APPLY NEW MIGRATIONS!**
