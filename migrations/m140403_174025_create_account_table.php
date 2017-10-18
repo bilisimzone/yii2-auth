@@ -14,24 +14,28 @@ use coreb2c\auth\migrations\Migration;
 /**
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com
  */
-class m140403_174025_create_account_table extends Migration
-{
-    public function up()
-    {
-        $this->createTable('{{%account}}', [
-            'id'         => $this->primaryKey(),
-            'user_id'    => $this->integer()->null(),
-            'provider'   => $this->string()->notNull(),
-            'client_id'  => $this->string()->notNull(),
-            'properties' => $this->text()->null(),
-        ], $this->tableOptions);
+class m140403_174025_create_account_table extends Migration {
+
+    public function up() {
+        $this->createTable('{{%social_account}}', [
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->null(),
+            'provider' => $this->string()->notNull(),
+            'client_id' => $this->string()->notNull(),
+            'data' => $this->text()->null(),
+            'code' => $this->string(32)->null(),
+            'created_at' => $this->integer()->null(),
+            'email' => $this->string()->null(),
+            'username' => $this->string()->null(),
+                ], $this->tableOptions);
 
         $this->createIndex('{{%account_unique}}', '{{%account}}', ['provider', 'client_id'], true);
+        $this->createIndex('{{%account_unique_code}}', '{{%social_account}}', 'code', true);
         $this->addForeignKey('{{%fk_user_account}}', '{{%account}}', 'user_id', '{{%user}}', 'id', $this->cascade, $this->restrict);
     }
 
-    public function down()
-    {
+    public function down() {
         $this->dropTable('{{%account}}');
     }
+
 }
