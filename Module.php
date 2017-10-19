@@ -12,6 +12,7 @@
 namespace coreb2c\auth;
 
 use yii\base\Module as BaseModule;
+use yii\filters\AccessControl;
 
 /**
  * This is the main module class for the yii2-auth.
@@ -20,8 +21,8 @@ use yii\base\Module as BaseModule;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class Module extends BaseModule
-{
+class Module extends BaseModule {
+
     const VERSION = '1.0';
 
     /** Email is changed right after user enter's new email address. */
@@ -32,6 +33,11 @@ class Module extends BaseModule
 
     /** Email is changed after user clicks both confirmation links sent to his old and new email addresses. */
     const STRATEGY_SECURE = 2;
+
+    /**
+     * @var string
+     */
+    public $defaultRoute = 'role/index';
 
     /** @var bool Whether to show flash messages. */
     public $enableFlashMessages = true;
@@ -99,12 +105,46 @@ class Module extends BaseModule
 
     /** @var array The rules to be used in URL management. */
     public $urlRules = [
-        '<id:\d+>'                               => 'profile/show',
-        '<action:(login|logout|auth)>'           => 'security/<action>',
-        '<action:(register|resend)>'             => 'registration/<action>',
+        '<id:\d+>' => 'profile/show',
+        '<action:(login|logout|auth)>' => 'security/<action>',
+        '<action:(register|resend)>' => 'registration/<action>',
         'confirm/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'registration/confirm',
-        'forgot'                                 => 'recovery/request',
+        'forgot' => 'recovery/request',
         'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'recovery/reset',
-        'settings/<action:\w+>'                  => 'settings/<action>'
+        'settings/<action:\w+>' => 'settings/<action>'
     ];
+
+    /** @inheritdoc */
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => [$this, 'checkAccess'],
+                    ]
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Checks access.
+     *
+     * @return bool
+     */
+    public function checkAccess() {
+        $user = \Yii::$app->user->identity;
+
+        if (method_exists($user, 'getIsAdmin')) {
+            return $user->getIsAdmin();
+        } else if ($this->adminPermission) {
+            return $this->adminPermission ? \Yii::$app->user->can($this->adminPermission) : false;
+        } else {
+            return isset($user->username) ? in_array($user->username, $this->admins) : false;
+        }
+    }
+
 }

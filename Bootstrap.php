@@ -16,6 +16,11 @@ use yii\authclient\Collection;
 use yii\base\BootstrapInterface;
 use yii\console\Application as ConsoleApplication;
 use yii\i18n\PhpMessageSource;
+use coreb2c\auth\components\DbManager;
+use coreb2c\auth\components\ManagerInterface;
+use yii\base\Application;
+use yii\web\Application as WebApplication;
+use yii\base\InvalidConfigException;
 
 /**
  * Bootstrap class registers module and user application component. It also creates some url rules which will be applied
@@ -23,25 +28,44 @@ use yii\i18n\PhpMessageSource;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class Bootstrap implements BootstrapInterface
-{
+class Bootstrap implements BootstrapInterface {
+
+    const VERSION = '1.0.0-alpha';
+
     /** @var array Model's map */
     private $_modelMap = [
-        'User'             => 'coreb2c\auth\models\User',
-        'Account'          => 'coreb2c\auth\models\Account',
-        'Profile'          => 'coreb2c\auth\models\Profile',
-        'Token'            => 'coreb2c\auth\models\Token',
+        'User' => 'coreb2c\auth\models\User',
+        'Account' => 'coreb2c\auth\models\Account',
+        'Profile' => 'coreb2c\auth\models\Profile',
+        'Token' => 'coreb2c\auth\models\Token',
         'RegistrationForm' => 'coreb2c\auth\models\RegistrationForm',
-        'ResendForm'       => 'coreb2c\auth\models\ResendForm',
-        'LoginForm'        => 'coreb2c\auth\models\LoginForm',
-        'SettingsForm'     => 'coreb2c\auth\models\SettingsForm',
-        'RecoveryForm'     => 'coreb2c\auth\models\RecoveryForm',
-        'UserSearch'       => 'coreb2c\auth\models\UserSearch',
+        'ResendForm' => 'coreb2c\auth\models\ResendForm',
+        'LoginForm' => 'coreb2c\auth\models\LoginForm',
+        'SettingsForm' => 'coreb2c\auth\models\SettingsForm',
+        'RecoveryForm' => 'coreb2c\auth\models\RecoveryForm',
+        'UserSearch' => 'coreb2c\auth\models\UserSearch',
     ];
 
     /** @inheritdoc */
-    public function bootstrap($app)
-    {
+    public function bootstrap($app) {
+        // register translations
+        if (!isset($app->get('i18n')->translations['rbac*'])) {
+            $app->get('i18n')->translations['rbac*'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => __DIR__ . '/messages',
+                'sourceLanguage' => 'en-US',
+            ];
+        }
+        $authManager = $app->get('authManager', false);
+
+        if (!$authManager) {
+            $app->set('authManager', [
+                'class' => DbManager::className(),
+            ]);
+        } else if (!($authManager instanceof ManagerInterface)) {
+            throw new InvalidConfigException('You have wrong authManager configuration');
+        }
+
         /** @var Module $module */
         /** @var \yii\db\ActiveRecord $modelName */
         if ($app->hasModule('user') && ($module = $app->getModule('user')) instanceof Module) {
@@ -59,9 +83,9 @@ class Bootstrap implements BootstrapInterface
             }
 
             Yii::$container->setSingleton(Finder::className(), [
-                'userQuery'    => Yii::$container->get('UserQuery'),
+                'userQuery' => Yii::$container->get('UserQuery'),
                 'profileQuery' => Yii::$container->get('ProfileQuery'),
-                'tokenQuery'   => Yii::$container->get('TokenQuery'),
+                'tokenQuery' => Yii::$container->get('TokenQuery'),
                 'accountQuery' => Yii::$container->get('AccountQuery'),
             ]);
 
@@ -76,7 +100,7 @@ class Bootstrap implements BootstrapInterface
 
                 $configUrlRule = [
                     'prefix' => $module->urlPrefix,
-                    'rules'  => $module->urlRules,
+                    'rules' => $module->urlRules,
                 ];
 
                 if ($module->urlPrefix != 'user') {
@@ -110,8 +134,7 @@ class Bootstrap implements BootstrapInterface
     }
 
     /** Ensure the module is not in DEBUG mode on production environments */
-    public function ensureCorrectDebugSetting()
-    {
+    public function ensureCorrectDebugSetting() {
         if (!defined('YII_DEBUG')) {
             return false;
         }
@@ -127,4 +150,14 @@ class Bootstrap implements BootstrapInterface
 
         return Yii::$app->getModule('user')->debug;
     }
+
+    /**
+     * Verifies that authManager component is configured.
+     * @param  Application $app
+     * @return bool
+     */
+    protected function checkAuthManagerConfigured(Application $app) {
+        return $app->authManager instanceof ManagerInterface;
+    }
+
 }
