@@ -37,7 +37,7 @@ return [
     'Roles' => 'Roolit',
     'Rule' => 'Sääntö',
     'Rule class can not be instantiated' => 'Sääntö -luokasta ei voi luoda ilmentymää',
-    'Rule class must extend "yii\rbac\Rule"' => 'Sääntö -luokan pitää laajentaa "yii\rbac\Rule"',
+    'Rule class must extend "yii\auth\Rule"' => 'Sääntö -luokan pitää laajentaa "yii\auth\Rule"',
     'Rule name' => 'Säännön nimi',
     'Save' => 'Tallenna',
     'There is neither role nor permission with name "{0}"' => '"{0}" -nimellä ei ole roolia eikä käyttöoikeutta',

@@ -37,7 +37,7 @@ return [
     'Roles' => 'Rollen',
     'Rule' => 'Regel',
     'Rule class can not be instantiated' => 'Die Regelklasse kann nicht instanziiert werden',
-    'Rule class must extend "yii\rbac\Rule"' => 'Die Regelklasse muss "yii\rbac\Rule" erweitern',
+    'Rule class must extend "yii\auth\Rule"' => 'Die Regelklasse muss "yii\auth\Rule" erweitern',
     'Rule name' => 'Regelname',
     'Save' => 'Speichern',
     'There is neither role nor permission with name "{0}"' => 'Es gibt weder eine Regel noch eine Berechtigung mit dem Namen "{0}"',

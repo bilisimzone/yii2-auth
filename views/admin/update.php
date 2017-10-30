@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'label' => Yii::t('user', 'Assignments'),
                             'url' => ['/auth/admin/assignments', 'id' => $user->id],
-                            'visible' => isset(Yii::$app->extensions['coreb2c/yii2-rbac']),
+                            'visible' => isset(Yii::$app->extensions['coreb2c/yii2-auth']),
                         ],
                         '<hr>',
                         [

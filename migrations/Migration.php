@@ -16,7 +16,7 @@ use coreb2c\auth\components\DbManager;
 use yii\base\Component;
 use yii\db\MigrationInterface;
 use yii\di\Instance;
-use yii\auth\Item;
+use yii\rbac\Item;
 use yii\auth\Permission;
 use yii\auth\Role;
 use yii\auth\Rule;

@@ -13,11 +13,11 @@ namespace coreb2c\auth\controllers;
 
 use yii\base\InvalidConfigException;
 use yii\base\Model;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use coreb2c\auth\models\Search;
+use coreb2c\auth\components\RbacController as Controller;
 
 /**
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>

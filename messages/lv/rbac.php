@@ -35,7 +35,7 @@ return [
     'Permissions' => 'Tiesības',
     'Roles' => 'Lomas',
     'Rule class can not be instantiated' => 'Lomu klasi nevar izveidot',
-    'Rule class must extend "yii\rbac\Rule"' => 'Lomas klase ir jāveido no klases "yii\rbac\Rule"',
+    'Rule class must extend "yii\auth\Rule"' => 'Lomas klase ir jāveido no klases "yii\auth\Rule"',
     'Rule name' => 'Lomas nosaukums',
     'Save' => 'Saglabāt',
     'The item description (Optional).' => 'Apraksts (Neobligāts)',

@@ -16,7 +16,7 @@ use coreb2c\auth\models\Rule;
 use coreb2c\auth\models\RuleSearch;
 use yii\di\Instance;
 use yii\filters\VerbFilter;
-use yii\web\Controller;
+use coreb2c\auth\components\RbacController as Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
@@ -187,14 +187,14 @@ class RuleController extends Controller
 
     /**
      * @param  string $name
-     * @return mixed|null|\yii\rbac\Rule
+     * @return mixed|null|\yii\auth\Rule
      * @throws NotFoundHttpException
      */
     private function findRule($name)
     {
         $rule = $this->authManager->getRule($name);
 
-        if ($rule instanceof \yii\rbac\Rule) {
+        if ($rule instanceof \yii\auth\Rule) {
             return $rule;
         }
 

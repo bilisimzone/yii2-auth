@@ -45,15 +45,15 @@ class Menu extends Nav
             ],
             [
                 'label' => \Yii::t('rbac', 'Roles'),
-                'url'   => ['/rbac/role/index'],
+                'url'   => ['/auth/role/index'],
             ],
             [
                 'label' => \Yii::t('rbac', 'Permissions'),
-                'url'   => ['/rbac/permission/index'],
+                'url'   => ['/auth/permission/index'],
             ],
             [
                 'label' => \Yii::t('rbac', 'Rules'),
-                'url'   => ['/rbac/rule/index'],
+                'url'   => ['/auth/rule/index'],
             ],
             [
                 'label' => \Yii::t('rbac', 'Create'),
@@ -65,15 +65,15 @@ class Menu extends Nav
                     ],
                     [
                         'label' => \Yii::t('rbac', 'New role'),
-                        'url'   => ['/rbac/role/create']
+                        'url'   => ['/auth/role/create']
                     ],
                     [
                         'label' => \Yii::t('rbac', 'New permission'),
-                        'url'   => ['/rbac/permission/create']
+                        'url'   => ['/auth/permission/create']
                     ],
                     [
                         'label' => \Yii::t('rbac', 'New rule'),
-                        'url'   => ['/rbac/rule/create']
+                        'url'   => ['/auth/rule/create']
                     ]
                 ]
             ],

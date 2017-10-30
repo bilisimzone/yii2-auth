@@ -37,7 +37,7 @@ use yii\helpers\Html;
     ],
     'pluginOptions' => [
         'ajax' => [
-            'url'  => Url::to(['/rbac/rule/search']),
+            'url'  => Url::to(['/auth/rule/search']),
             'data' => new JsExpression('function(params) { return {q:params.term}; }')
         ],
         'allowClear' => true,

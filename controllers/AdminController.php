@@ -361,7 +361,7 @@ class AdminController extends Controller
     }
 
     /**
-     * If "coreb2c/yii2-rbac" extension is installed, this page displays form
+     * If "coreb2c/yii2-auth" extension is installed, this page displays form
      * where user can assign multiple auth items to user.
      *
      * @param int $id
@@ -371,7 +371,7 @@ class AdminController extends Controller
      */
     public function actionAssignments($id)
     {
-        if (!isset(\Yii::$app->extensions['coreb2c/yii2-rbac'])) {
+        if (!isset(\Yii::$app->extensions['coreb2c/yii2-auth'])) {
             throw new NotFoundHttpException();
         }
         Url::remember('', 'actions-redirect');

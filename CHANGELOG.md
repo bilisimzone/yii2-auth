@@ -83,7 +83,7 @@
 - `enh` Added link to registration page on login form (thiagotalma)
 - `enh` Improved username regexp (thiagotalma)
 - `fix` Updated translations for Portuguese language (invaderhd & thiagotalma & andredp)
-- `enh` Added integration with Yii2-rbac (dmeroff)
+- `enh` Added integration with Yii2-auth (dmeroff)
 - `enh` Improved admin views and controller (dmeroff)
 - `enh` Added datepicker in user grid view (dmeroff)
 

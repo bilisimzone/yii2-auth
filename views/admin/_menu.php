@@ -25,18 +25,18 @@ use yii\bootstrap\Nav;
         ],
         [
             'label' => Yii::t('user', 'Roles'),
-            'url' => ['/rbac/role/index'],
-            'visible' => isset(Yii::$app->extensions['coreb2c/yii2-rbac']),
+            'url' => ['/auth/role/index'],
+            'visible' => isset(Yii::$app->extensions['coreb2c/yii2-auth']),
         ],
         [
             'label' => Yii::t('user', 'Permissions'),
-            'url' => ['/rbac/permission/index'],
-            'visible' => isset(Yii::$app->extensions['coreb2c/yii2-rbac']),
+            'url' => ['/auth/permission/index'],
+            'visible' => isset(Yii::$app->extensions['coreb2c/yii2-auth']),
         ],
         [
             'label' => \Yii::t('user', 'Rules'),
-            'url'   => ['/rbac/rule/index'],
-            'visible' => isset(Yii::$app->extensions['coreb2c/yii2-rbac']),
+            'url'   => ['/auth/rule/index'],
+            'visible' => isset(Yii::$app->extensions['coreb2c/yii2-auth']),
         ],
         [
             'label' => Yii::t('user', 'Create'),
@@ -47,18 +47,18 @@ use yii\bootstrap\Nav;
                 ],
                 [
                     'label' => Yii::t('user', 'New role'),
-                    'url' => ['/rbac/role/create'],
-                    'visible' => isset(Yii::$app->extensions['coreb2c/yii2-rbac']),
+                    'url' => ['/auth/role/create'],
+                    'visible' => isset(Yii::$app->extensions['coreb2c/yii2-auth']),
                 ],
                 [
                     'label' => Yii::t('user', 'New permission'),
-                    'url' => ['/rbac/permission/create'],
-                    'visible' => isset(Yii::$app->extensions['coreb2c/yii2-rbac']),
+                    'url' => ['/auth/permission/create'],
+                    'visible' => isset(Yii::$app->extensions['coreb2c/yii2-auth']),
                 ],
                 [
                     'label' => \Yii::t('user', 'New rule'),
-                    'url'   => ['/rbac/rule/create'],
-                    'visible' => isset(Yii::$app->extensions['coreb2c/yii2-rbac']),
+                    'url'   => ['/auth/rule/create'],
+                    'visible' => isset(Yii::$app->extensions['coreb2c/yii2-auth']),
                 ]
             ],
         ],

@@ -103,8 +103,8 @@ class Bootstrap implements BootstrapInterface {
                     'rules' => $module->urlRules,
                 ];
 
-                if ($module->urlPrefix != 'user') {
-                    $configUrlRule['routePrefix'] = 'user';
+                if ($module->urlPrefix != 'auth') {
+                    $configUrlRule['routePrefix'] = 'auth';
                 }
 
                 $configUrlRule['class'] = 'yii\web\GroupUrlRule';

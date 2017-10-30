@@ -90,7 +90,7 @@ class Rule extends Model
                 }
                 $rule = $this->authManager->getRule($this->name);
 
-                if ($rule instanceof \yii\rbac\Rule) {
+                if ($rule instanceof \yii\auth\Rule) {
                     $this->addError('name', \Yii::t('rbac', 'Name is already in use'));
                 }
             }],
@@ -99,7 +99,7 @@ class Rule extends Model
                     $this->addError('class', \Yii::t('rbac', 'Class "{0}" does not exist', $this->class));
                 } else {
                     try {
-                        $class = '\yii\rbac\Rule';
+                        $class = '\yii\auth\Rule';
                         $rule  = \Yii::createObject($this->class);
 
                         if (!($rule instanceof $class)) {

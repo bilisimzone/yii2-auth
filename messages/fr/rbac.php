@@ -38,7 +38,7 @@ return [
     'Roles' => 'Rôles',
     'Rule' => 'Règle',
     'Rule class can not be instantiated' => 'La classe de règle ne peut pas être instanciée',
-    'Rule class must extend "yii\rbac\Rule"' => 'La classe de règle doit étendre "yii\rbac\Rule"',
+    'Rule class must extend "yii\auth\Rule"' => 'La classe de règle doit étendre "yii\auth\Rule"',
     'Rule name' => 'Nom de la règle',
     'Save' => 'Sauvegarder',
     'The item description (Optional).' => 'La description du rôle/de la permission (Facultatif)',

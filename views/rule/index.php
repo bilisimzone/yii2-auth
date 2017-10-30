@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?php $this->beginContent('@coreb2c/rbac/views/layout.php') ?>
+<?php $this->beginContent('@coreb2c/auth/views/layout.php') ?>
 
 <?php Pjax::begin() ?>
 
@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'class'      => ActionColumn::className(),
             'template'   => '{update} {delete}',
             'urlCreator' => function ($action, $model) {
-                return Url::to(['/rbac/rule/' . $action, 'name' => $model['name']]);
+                return Url::to(['/auth/rule/' . $action, 'name' => $model['name']]);
             },
             'options'   => [
                 'style' => 'width: 5%'

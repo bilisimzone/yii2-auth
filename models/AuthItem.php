@@ -54,7 +54,7 @@ abstract class AuthItem extends Model
     public $children = [];
 
     /**
-     * @var \yii\rbac\Role|\yii\rbac\Permission
+     * @var \yii\auth\Role|\yii\auth\Permission
      */
     public $item;
 

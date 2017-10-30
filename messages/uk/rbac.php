@@ -20,7 +20,7 @@ return [
     'Children' => 'Дочірні правила',
     'Items' => 'Елементи',
     'Rule' => 'Правило',
-    'Rule class must extend "yii\rbac\Rule"' => 'Клас правил повинен наслідувати клас "yii\rbac\Rule"',
+    'Rule class must extend "yii\auth\Rule"' => 'Клас правил повинен наслідувати клас "yii\auth\Rule"',
     'Classname of the rule associated with this item' => 'Ім\'я класу правил, пов\'язаних з цим елементом',
     'The item description (Optional).' => 'Опис елементу (Необов\'язково).',
     'The name of the item.' => 'Ім\'я елементу.',

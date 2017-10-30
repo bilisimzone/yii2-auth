@@ -35,7 +35,7 @@ return [
     'Permissions' => 'دسترسی ها',
     'Roles' => 'نقش ها',
     'Rule class can not be instantiated' => 'کلاس نقش قابل نمونه سازی نیست',
-    'Rule class must extend "yii\rbac\Rule"' => 'کلاس نقش باید از "yii\rbac\Rule" مشتق شود',
+    'Rule class must extend "yii\auth\Rule"' => 'کلاس نقش باید از "yii\auth\Rule" مشتق شود',
     'Rule name' => 'نام نقش',
     'Save' => 'ذخیره',
     'The item description (Optional).' => 'توضیحات آیتم (اختیاری).',

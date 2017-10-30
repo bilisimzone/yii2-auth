@@ -35,7 +35,7 @@ return [
     'Permissions' => 'Permessi',
     'Roles' => 'Ruoli',
     'Rule class can not be instantiated' => 'Impossibile istanziare la classe delle regole',
-    'Rule class must extend "yii\rbac\Rule"' => 'La classe delle regole deve estendere "yii\rbac\Rule"',
+    'Rule class must extend "yii\auth\Rule"' => 'La classe delle regole deve estendere "yii\auth\Rule"',
     'Rule name' => 'Nome regola',
     'Save' => 'Salva',
     'The item description (Optional).' => 'Descrizione oggetto (opzionale).',

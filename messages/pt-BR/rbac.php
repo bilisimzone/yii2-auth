@@ -37,7 +37,7 @@ return [
     'Roles' => 'Papéis',
     'Rule' => 'Regra',
     'Rule class can not be instantiated' => 'A classe de regra não pode ser instanciada',
-    'Rule class must extend "yii\rbac\Rule"' => 'A classe de regra deve estender "yii\rbac\Rule"',
+    'Rule class must extend "yii\auth\Rule"' => 'A classe de regra deve estender "yii\auth\Rule"',
     'Rule name' => 'Nome da regra',
     'Save' => 'Salvar',
     'The item description (Optional).' => 'Descrição do item (Opcional).',

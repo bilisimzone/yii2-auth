@@ -12,7 +12,6 @@
 namespace coreb2c\auth;
 
 use yii\base\Module as BaseModule;
-use yii\filters\AccessControl;
 
 /**
  * This is the main module class for the yii2-auth.
@@ -37,7 +36,7 @@ class Module extends BaseModule {
     /**
      * @var string
      */
-    public $defaultRoute = 'role/index';
+    public $defaultRoute = 'admin/index';
 
     /** @var bool Whether to show flash messages. */
     public $enableFlashMessages = true;
@@ -113,38 +112,5 @@ class Module extends BaseModule {
         'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'recovery/reset',
         'settings/<action:\w+>' => 'settings/<action>'
     ];
-
-    /** @inheritdoc */
-    public function behaviors() {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => [$this, 'checkAccess'],
-                    ]
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * Checks access.
-     *
-     * @return bool
-     */
-    public function checkAccess() {
-        $user = \Yii::$app->user->identity;
-
-        if (method_exists($user, 'getIsAdmin')) {
-            return $user->getIsAdmin();
-        } else if ($this->adminPermission) {
-            return $this->adminPermission ? \Yii::$app->user->can($this->adminPermission) : false;
-        } else {
-            return isset($user->username) ? in_array($user->username, $this->admins) : false;
-        }
-    }
 
 }

@@ -11,7 +11,7 @@
 
 namespace coreb2c\auth\controllers;
 
-use yii\rbac\Permission;
+use yii\auth\Permission;
 use yii\web\NotFoundHttpException;
 use yii\rbac\Item;
 

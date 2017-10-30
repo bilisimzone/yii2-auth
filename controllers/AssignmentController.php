@@ -13,7 +13,7 @@ namespace coreb2c\auth\controllers;
 
 use coreb2c\auth\models\Assignment;
 use Yii;
-use yii\web\Controller;
+use coreb2c\auth\components\RbacController as Controller;
 
 /**
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>

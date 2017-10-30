@@ -37,7 +37,7 @@ return [
     'Roles' => 'Роли',
     'Rules' => 'Правила',
     'Rule class can not be instantiated' => 'Объект класса правила не может быть создан',
-    'Rule class must extend "yii\rbac\Rule"' => 'Класс правил должен быть наследником класса "yii\rbac\Rule"',
+    'Rule class must extend "yii\auth\Rule"' => 'Класс правил должен быть наследником класса "yii\auth\Rule"',
     'Rule name' => 'Правило',
     'Save' => 'Сохранить',
     'The item description (Optional).' => 'Описание (Необязательно)',

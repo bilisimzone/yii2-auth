@@ -19,7 +19,7 @@ use yii\di\Instance;
 use yii\helpers\Console;
 
 /**
- * Manages rbac migrations.
+ * Manages auth migrations.
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
@@ -34,7 +34,7 @@ class MigrateController extends BaseMigrateController
      * @var string the directory storing the migration classes. This can be either
      * a path alias or a directory.
      */
-    public $migrationPath = '@app/rbac/migrations';
+    public $migrationPath = '@app/auth/migrations';
 
     /**
      * @var Connection|array|string the DB connection object or the application component ID of the DB connection to use
@@ -45,7 +45,7 @@ class MigrateController extends BaseMigrateController
     /**
      * @inheritdoc
      */
-    public $templateFile = '@coreb2c/rbac/views/migration.php';
+    public $templateFile = '@coreb2c/auth/views/migration.php';
 
     /**
      * @inheritdoc
