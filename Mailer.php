@@ -53,7 +53,7 @@ class Mailer extends Component
     public function getWelcomeSubject()
     {
         if ($this->welcomeSubject == null) {
-            $this->setWelcomeSubject(Yii::t('user', 'Welcome to {0}', Yii::$app->name));
+            $this->setWelcomeSubject(Yii::t('auth', 'Welcome to {0}', Yii::$app->name));
         }
 
         return $this->welcomeSubject;
@@ -73,7 +73,7 @@ class Mailer extends Component
     public function getNewPasswordSubject()
     {
         if ($this->newPasswordSubject == null) {
-            $this->setNewPasswordSubject(Yii::t('user', 'Your password on {0} has been changed', Yii::$app->name));
+            $this->setNewPasswordSubject(Yii::t('auth', 'Your password on {0} has been changed', Yii::$app->name));
         }
 
         return $this->newPasswordSubject;
@@ -93,7 +93,7 @@ class Mailer extends Component
     public function getConfirmationSubject()
     {
         if ($this->confirmationSubject == null) {
-            $this->setConfirmationSubject(Yii::t('user', 'Confirm account on {0}', Yii::$app->name));
+            $this->setConfirmationSubject(Yii::t('auth', 'Confirm account on {0}', Yii::$app->name));
         }
 
         return $this->confirmationSubject;
@@ -113,7 +113,7 @@ class Mailer extends Component
     public function getReconfirmationSubject()
     {
         if ($this->reconfirmationSubject == null) {
-            $this->setReconfirmationSubject(Yii::t('user', 'Confirm email change on {0}', Yii::$app->name));
+            $this->setReconfirmationSubject(Yii::t('auth', 'Confirm email change on {0}', Yii::$app->name));
         }
 
         return $this->reconfirmationSubject;
@@ -133,7 +133,7 @@ class Mailer extends Component
     public function getRecoverySubject()
     {
         if ($this->recoverySubject == null) {
-            $this->setRecoverySubject(Yii::t('user', 'Complete password reset on {0}', Yii::$app->name));
+            $this->setRecoverySubject(Yii::t('auth', 'Complete password reset on {0}', Yii::$app->name));
         }
 
         return $this->recoverySubject;

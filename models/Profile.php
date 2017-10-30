@@ -85,13 +85,13 @@ class Profile extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name'           => \Yii::t('user', 'Name'),
-            'public_email'   => \Yii::t('user', 'Email (public)'),
-            'gravatar_email' => \Yii::t('user', 'Gravatar email'),
-            'location'       => \Yii::t('user', 'Location'),
-            'website'        => \Yii::t('user', 'Website'),
-            'bio'            => \Yii::t('user', 'Bio'),
-            'timezone'       => \Yii::t('user', 'Time zone'),
+            'name'           => \Yii::t('auth', 'Name'),
+            'public_email'   => \Yii::t('auth', 'Email (public)'),
+            'gravatar_email' => \Yii::t('auth', 'Gravatar email'),
+            'location'       => \Yii::t('auth', 'Location'),
+            'website'        => \Yii::t('auth', 'Website'),
+            'bio'            => \Yii::t('auth', 'Bio'),
+            'timezone'       => \Yii::t('auth', 'Time zone'),
         ];
     }
 
@@ -104,7 +104,7 @@ class Profile extends ActiveRecord
     public function validateTimeZone($attribute, $params)
     {
         if (!in_array($this->$attribute, timezone_identifiers_list())) {
-            $this->addError($attribute, \Yii::t('user', 'Time zone is not valid'));
+            $this->addError($attribute, \Yii::t('auth', 'Time zone is not valid'));
         }
     }
 

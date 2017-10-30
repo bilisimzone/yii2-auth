@@ -135,7 +135,7 @@ class Account extends ActiveRecord {
      */
     public static function connectWithUser(BaseClientInterface $client) {
         if (\Yii::$app->user->isGuest) {
-            \Yii::$app->session->setFlash('danger', \Yii::t('user', 'Something went wrong'));
+            \Yii::$app->session->setFlash('danger', \Yii::t('auth', 'Something went wrong'));
 
             return;
         }
@@ -144,10 +144,10 @@ class Account extends ActiveRecord {
 
         if ($account->user === null) {
             $account->link('user', \Yii::$app->user->identity);
-            \Yii::$app->session->setFlash('success', \Yii::t('user', 'Your account has been connected'));
+            \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Your account has been connected'));
         } else {
             \Yii::$app->session->setFlash(
-                    'danger', \Yii::t('user', 'This account has already been connected to another user')
+                    'danger', \Yii::t('auth', 'This account has already been connected to another user')
             );
         }
     }

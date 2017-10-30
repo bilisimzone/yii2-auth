@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
  * @var coreb2c\auth\models\RecoveryForm $model
  */
 
-$this->title = Yii::t('user', 'Recover your password');
+$this->title = Yii::t('auth', 'Recover your password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
-                <?= Html::submitButton(Yii::t('user', 'Continue'), ['class' => 'btn btn-primary btn-block']) ?><br>
+                <?= Html::submitButton(Yii::t('auth', 'Continue'), ['class' => 'btn btn-primary btn-block']) ?><br>
 
                 <?php ActiveForm::end(); ?>
             </div>

@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     'options' => [
         'class' => 'alert-success'
     ],
-    'body' => Yii::t('rbac', 'Assignments have been updated'),
+    'body' => Yii::t('auth', 'Assignments have been updated'),
 ]) ?>
 
 <?php endif ?>
@@ -47,7 +47,7 @@ use yii\widgets\ActiveForm;
     ],
 ]) ?>
 
-<?= Html::submitButton(Yii::t('rbac', 'Update assignments'), ['class' => 'btn btn-success btn-block']) ?>
+<?= Html::submitButton(Yii::t('auth', 'Update assignments'), ['class' => 'btn btn-success btn-block']) ?>
 
 <?php ActiveForm::end() ?>
 

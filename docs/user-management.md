@@ -61,7 +61,7 @@ echo Nav::widget([
     'items' => [
         Yii::$app->session->has(\coreb2c\auth\controllers\AdminController::ORIGINAL_USER_SESSION_KEY) ?
         '<li>' . Html::beginForm(['/auth/admin/switch'], 'post', ['class' => 'navbar-form'])
-            . Html::submitButton('<span class="glyphicon glyphicon-user"></span> ' . Yii::t('user', 'Back to original user'),
+            . Html::submitButton('<span class="glyphicon glyphicon-user"></span> ' . Yii::t('auth', 'Back to original user'),
                 ['class' => 'btn btn-link']
             ) . Html::endForm() . '</li>' : '',
       ],

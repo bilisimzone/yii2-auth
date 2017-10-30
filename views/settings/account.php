@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
  * @var coreb2c\auth\models\SettingsForm $model
  */
 
-$this->title = Yii::t('user', 'Account settings');
+$this->title = Yii::t('auth', 'Account settings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="form-group">
                     <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?><br>
+                        <?= Html::submitButton(Yii::t('auth', 'Save'), ['class' => 'btn btn-block btn-success']) ?><br>
                     </div>
                 </div>
 
@@ -68,18 +68,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if ($model->module->enableAccountDelete): ?>
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?= Yii::t('user', 'Delete account') ?></h3>
+                    <h3 class="panel-title"><?= Yii::t('auth', 'Delete account') ?></h3>
                 </div>
                 <div class="panel-body">
                     <p>
-                        <?= Yii::t('user', 'Once you delete your account, there is no going back') ?>.
-                        <?= Yii::t('user', 'It will be deleted forever') ?>.
-                        <?= Yii::t('user', 'Please be certain') ?>.
+                        <?= Yii::t('auth', 'Once you delete your account, there is no going back') ?>.
+                        <?= Yii::t('auth', 'It will be deleted forever') ?>.
+                        <?= Yii::t('auth', 'Please be certain') ?>.
                     </p>
-                    <?= Html::a(Yii::t('user', 'Delete account'), ['delete'], [
+                    <?= Html::a(Yii::t('auth', 'Delete account'), ['delete'], [
                         'class' => 'btn btn-danger',
                         'data-method' => 'post',
-                        'data-confirm' => Yii::t('user', 'Are you sure? There is no going back'),
+                        'data-confirm' => Yii::t('auth', 'Are you sure? There is no going back'),
                     ]) ?>
                 </div>
             </div>

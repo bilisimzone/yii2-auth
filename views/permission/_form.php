@@ -33,7 +33,7 @@ use yii\helpers\Html;
 
 <?= $form->field($model, 'rule')->widget(Select2::className(), [
     'options'   => [
-        'placeholder' => Yii::t('rbac', 'Select rule'),
+        'placeholder' => Yii::t('auth', 'Select rule'),
     ],
     'pluginOptions' => [
         'ajax' => [
@@ -46,7 +46,7 @@ use yii\helpers\Html;
 
 <?php if ($model->dataCannotBeDecoded): ?>
     <div class="alert alert-info">
-        <?= Yii::t('rbac', 'Data cannot be decoded') ?>
+        <?= Yii::t('auth', 'Data cannot be decoded') ?>
     </div>
 <?php else: ?>
     <?= $form->field($model, 'data')->textarea([
@@ -62,6 +62,6 @@ use yii\helpers\Html;
     ],
 ]) ?>
 
-<?= Html::submitButton(Yii::t('rbac', 'Save'), ['class' => 'btn btn-success btn-block']) ?>
+<?= Html::submitButton(Yii::t('auth', 'Save'), ['class' => 'btn btn-success btn-block']) ?>
 
 <?php ActiveForm::end() ?>

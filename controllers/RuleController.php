@@ -90,7 +90,7 @@ class RuleController extends Controller
         }
 
         if ($model->load(\Yii::$app->request->post()) && $model->create()) {
-            \Yii::$app->session->setFlash('success', \Yii::t('rbac', 'Rule has been added'));
+            \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Rule has been added'));
             return $this->redirect(['index']);
         }
 
@@ -122,7 +122,7 @@ class RuleController extends Controller
         }
 
         if ($model->load(\Yii::$app->request->post()) && $model->update()) {
-            \Yii::$app->session->setFlash('success', \Yii::t('rbac', 'Rule has been updated'));
+            \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Rule has been updated'));
             return $this->redirect(['index']);
         }
 
@@ -145,7 +145,7 @@ class RuleController extends Controller
         $this->authManager->remove($rule);
         $this->authManager->invalidateCache();
 
-        \Yii::$app->session->setFlash('success', \Yii::t('rbac', 'Rule has been removed'));
+        \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Rule has been removed'));
 
         return $this->redirect(['index']);
     }
@@ -198,6 +198,6 @@ class RuleController extends Controller
             return $rule;
         }
 
-        throw new NotFoundHttpException(\Yii::t('rbac', 'Not found'));
+        throw new NotFoundHttpException(\Yii::t('auth', 'Not found'));
     }
 }

@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
  * @var coreb2c\auth\Module $module
  */
 
-$this->title = Yii::t('user', 'Sign in');
+$this->title = Yii::t('auth', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php if ($module->debug): ?>
                     <div class="alert alert-warning">
-                        <?= Yii::t('user', 'Password is not necessary because the module is in DEBUG mode.'); ?>
+                        <?= Yii::t('auth', 'Password is not necessary because the module is in DEBUG mode.'); ?>
                     </div>
                 <?php else: ?>
                     <?= $form->field(
@@ -70,10 +70,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['inputOptions' => ['class' => 'form-control', 'tabindex' => '2']])
                         ->passwordInput()
                         ->label(
-                            Yii::t('user', 'Password')
+                            Yii::t('auth', 'Password')
                             . ($module->enablePasswordRecovery ?
                                 ' (' . Html::a(
-                                    Yii::t('user', 'Forgot password?'),
+                                    Yii::t('auth', 'Forgot password?'),
                                     ['/auth/recovery/request'],
                                     ['tabindex' => '5']
                                 )
@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '3']) ?>
 
                 <?= Html::submitButton(
-                    Yii::t('user', 'Sign in'),
+                    Yii::t('auth', 'Sign in'),
                     ['class' => 'btn btn-primary btn-block', 'tabindex' => '4']
                 ) ?>
 
@@ -93,12 +93,12 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <?php if ($module->enableConfirmation): ?>
             <p class="text-center">
-                <?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/auth/registration/resend']) ?>
+                <?= Html::a(Yii::t('auth', 'Didn\'t receive confirmation message?'), ['/auth/registration/resend']) ?>
             </p>
         <?php endif ?>
         <?php if ($module->enableRegistration): ?>
             <p class="text-center">
-                <?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/auth/registration/register']) ?>
+                <?= Html::a(Yii::t('auth', 'Don\'t have an account? Sign up!'), ['/auth/registration/register']) ?>
             </p>
         <?php endif ?>
         <?= Connect::widget([

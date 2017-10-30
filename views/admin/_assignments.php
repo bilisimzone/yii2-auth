@@ -23,7 +23,7 @@ use coreb2c\auth\widgets\Assignments;
     'options' => [
         'class' => 'alert-info alert-dismissible',
     ],
-    'body' => Yii::t('user', 'You can assign multiple roles or permissions to user by using the form below'),
+    'body' => Yii::t('auth', 'You can assign multiple roles or permissions to user by using the form below'),
 ]) ?>
 
 <?= Assignments::widget(['userId' => $user->id]) ?>

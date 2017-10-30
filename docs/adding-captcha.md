@@ -64,7 +64,7 @@ form, just copy and paste following code into newly created view file.
      * @var yii\widgets\ActiveForm $form
      * @var app\models\RegistrationForm $model
      */
-    $this->title = Yii::t('user', 'Sign up');
+    $this->title = Yii::t('auth', 'Sign up');
     $this->params['breadcrumbs'][] = $this->title;
     ?>
     <div class="row">
@@ -88,13 +88,13 @@ form, just copy and paste following code into newly created view file.
                         'captchaAction' => ['/site/captcha']
                     ]) ?>
 
-                    <?= Html::submitButton(Yii::t('user', 'Sign up'), ['class' => 'btn btn-success btn-block']) ?>
+                    <?= Html::submitButton(Yii::t('auth', 'Sign up'), ['class' => 'btn btn-success btn-block']) ?>
 
                     <?php ActiveForm::end(); ?>
                 </div>
             </div>
             <p class="text-center">
-                <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/auth/security/login']) ?>
+                <?= Html::a(Yii::t('auth', 'Already registered? Sign in!'), ['/auth/security/login']) ?>
             </p>
         </div>
     </div>

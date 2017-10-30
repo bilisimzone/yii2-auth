@@ -14,7 +14,7 @@
  * @var $this  yii\web\View
  */
 
-$this->title = Yii::t('rbac', 'Update role');
+$this->title = Yii::t('auth', 'Update role');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

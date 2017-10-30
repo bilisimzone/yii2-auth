@@ -28,6 +28,6 @@ use yii\helpers\Html;
 
 <?= $form->field($model, 'class') ?>
 
-<?= Html::submitButton(Yii::t('rbac', 'Save'), ['class' => 'btn btn-success btn-block']) ?>
+<?= Html::submitButton(Yii::t('auth', 'Save'), ['class' => 'btn btn-success btn-block']) ?>
 
 <?php ActiveForm::end() ?>

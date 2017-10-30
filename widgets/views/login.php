@@ -41,13 +41,13 @@ use yii\helpers\Html;
 
     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
-    <?= Html::submitButton(Yii::t('user', 'Sign in'), ['class' => 'btn btn-primary btn-block']) ?>
+    <?= Html::submitButton(Yii::t('auth', 'Sign in'), ['class' => 'btn btn-primary btn-block']) ?>
 
     <?php ActiveForm::end(); ?>
 <?php else: ?>
     <?=
 
-    Html::a(Yii::t('user', 'Logout'), ['/auth/security/logout'], [
+    Html::a(Yii::t('auth', 'Logout'), ['/auth/security/logout'], [
         'class' => 'btn btn-danger btn-block',
         'data-method' => 'post'
     ])

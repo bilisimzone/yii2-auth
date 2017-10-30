@@ -13,10 +13,10 @@
  * @var coreb2c\auth\models\User
  */
 ?>
-<?= Yii::t('user', 'Hello') ?>,
+<?= Yii::t('auth', 'Hello') ?>,
 
-<?= Yii::t('user', 'Your account on {0} has a new password', Yii::$app->name) ?>.
-<?= Yii::t('user', 'We have generated a password for you') ?>:
+<?= Yii::t('auth', 'Your account on {0} has a new password', Yii::$app->name) ?>.
+<?= Yii::t('auth', 'We have generated a password for you') ?>:
 <?= $user->password ?>
 
-<?= Yii::t('user', 'If you did not make this request you can ignore this email') ?>.
+<?= Yii::t('auth', 'If you did not make this request you can ignore this email') ?>.

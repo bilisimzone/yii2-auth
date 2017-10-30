@@ -22,7 +22,7 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('rbac', 'Rules');
+$this->title = Yii::t('auth', 'Rules');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'columns'      => [
         [
             'attribute' => 'name',
-            'label'     => Yii::t('rbac', 'Name'),
+            'label'     => Yii::t('auth', 'Name'),
             'options'   => [
                 'style' => 'width: 20%'
             ],
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model'     => $searchModel,
                 'attribute' => 'name',
                 'options'   => [
-                    'placeholder' => Yii::t('rbac', 'Select rule'),
+                    'placeholder' => Yii::t('auth', 'Select rule'),
                 ],
                 'pluginOptions' => [
                     'ajax' => [
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'class',
-            'label'     => Yii::t('rbac', 'Class'),
+            'label'     => Yii::t('auth', 'Class'),
             'value'     => function ($row) {
                 $rule = unserialize($row['data']);
 
@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'created_at',
-            'label'     => Yii::t('rbac', 'Created at'),
+            'label'     => Yii::t('auth', 'Created at'),
             'format'    => 'datetime',
             'options'   => [
                 'style' => 'width: 20%'
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'updated_at',
-            'label'     => Yii::t('rbac', 'Updated at'),
+            'label'     => Yii::t('auth', 'Updated at'),
             'format'    => 'datetime',
             'options'   => [
                 'style' => 'width: 20%'

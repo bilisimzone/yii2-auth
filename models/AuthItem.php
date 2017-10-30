@@ -97,10 +97,10 @@ abstract class AuthItem extends Model
     public function attributeLabels()
     {
         return [
-            'name' => \Yii::t('rbac', 'Name'),
-            'description' => \Yii::t('rbac', 'Description'),
-            'children' => \Yii::t('rbac', 'Children'),
-            'rule' => \Yii::t('rbac', 'Rule'),
+            'name' => \Yii::t('auth', 'Name'),
+            'description' => \Yii::t('auth', 'Description'),
+            'children' => \Yii::t('auth', 'Children'),
+            'rule' => \Yii::t('auth', 'Rule'),
         ];
     }
 
@@ -125,7 +125,7 @@ abstract class AuthItem extends Model
             [['name', 'description', 'rule'], 'trim'],
             ['name', function () {
                 if ($this->manager->getItem($this->name) !== null) {
-                    $this->addError('name', \Yii::t('rbac', 'Auth item with such name already exists'));
+                    $this->addError('name', \Yii::t('auth', 'Auth item with such name already exists'));
                 }
             }, 'when' => function () {
                 return $this->scenario == 'create' || $this->item->name != $this->name;
@@ -135,14 +135,14 @@ abstract class AuthItem extends Model
                 $rule = $this->manager->getRule($this->rule);
 
                 if (!$rule) {
-                    $this->addError('rule', \Yii::t('rbac', 'Rule {0} does not exist', $this->rule));
+                    $this->addError('rule', \Yii::t('auth', 'Rule {0} does not exist', $this->rule));
                 }
             }],
             ['data', function () {
                 try {
                     Json::decode($this->data);
                 } catch (InvalidParamException $e) {
-                    $this->addError('data', \Yii::t('rbac', 'Data must be type of JSON ({0})', $e->getMessage()));
+                    $this->addError('data', \Yii::t('auth', 'Data must be type of JSON ({0})', $e->getMessage()));
                 }
             }],
         ];
@@ -171,10 +171,10 @@ abstract class AuthItem extends Model
         $this->item->ruleName    = empty($this->rule) ? null : $this->rule;
   
         if ($isNewItem) {
-            \Yii::$app->session->setFlash('success', \Yii::t('rbac', 'Item has been created'));
+            \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Item has been created'));
             $this->manager->add($this->item);
         } else {
-            \Yii::$app->session->setFlash('success', \Yii::t('rbac', 'Item has been updated'));
+            \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Item has been updated'));
             $this->manager->update($oldName, $this->item);
         }
 

@@ -22,7 +22,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('rbac', 'Roles');
+$this->title = Yii::t('auth', 'Roles');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'columns'      => [
         [
             'attribute' => 'name',
-            'header'    => Yii::t('rbac', 'Name'),
+            'header'    => Yii::t('auth', 'Name'),
             'options'   => [
                 'style' => 'width: 20%'
             ],
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'data'      => $filterModel->getNameList(),
                 'options'   => [
-                    'placeholder' => Yii::t('rbac', 'Select role'),
+                    'placeholder' => Yii::t('auth', 'Select role'),
                 ],
                 'pluginOptions' => [
                     'allowClear' => true,
@@ -56,19 +56,19 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'description',
-            'header'    => Yii::t('rbac', 'Description'),
+            'header'    => Yii::t('auth', 'Description'),
             'options'   => [
                 'style' => 'width: 55%',
             ],
             'filterInputOptions' => [
                 'class'       => 'form-control',
                 'id'          => null,
-                'placeholder' => Yii::t('rbac', 'Enter the description')
+                'placeholder' => Yii::t('auth', 'Enter the description')
             ],
         ],
         [
             'attribute' => 'rule_name',
-            'header'    => Yii::t('rbac', 'Rule name'),
+            'header'    => Yii::t('auth', 'Rule name'),
             'options'   => [
                 'style' => 'width: 20%'
             ],
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'rule_name',
                 'data'      => $filterModel->getRuleList(),
                 'options'   => [
-                    'placeholder' => Yii::t('rbac', 'Select rule'),
+                    'placeholder' => Yii::t('auth', 'Select rule'),
                 ],
                 'pluginOptions' => [
                     'allowClear' => true,

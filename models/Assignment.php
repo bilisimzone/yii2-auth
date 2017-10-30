@@ -63,7 +63,7 @@ class Assignment extends Model
     public function attributeLabels()
     {
         return [
-            'items' => \Yii::t('rbac', 'Items'),
+            'items' => \Yii::t('auth', 'Items'),
         ];
     }
 

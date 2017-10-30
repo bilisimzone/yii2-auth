@@ -187,14 +187,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'username'          => \Yii::t('user', 'Username'),
-            'email'             => \Yii::t('user', 'Email'),
-            'registration_ip'   => \Yii::t('user', 'Registration ip'),
-            'unconfirmed_email' => \Yii::t('user', 'New email'),
-            'password'          => \Yii::t('user', 'Password'),
-            'created_at'        => \Yii::t('user', 'Registration time'),
-            'last_login_at'     => \Yii::t('user', 'Last login'),
-            'confirmed_at'      => \Yii::t('user', 'Confirmation time'),
+            'username'          => \Yii::t('auth', 'Username'),
+            'email'             => \Yii::t('auth', 'Email'),
+            'registration_ip'   => \Yii::t('auth', 'Registration ip'),
+            'unconfirmed_email' => \Yii::t('auth', 'New email'),
+            'password'          => \Yii::t('auth', 'Password'),
+            'created_at'        => \Yii::t('auth', 'Registration time'),
+            'last_login_at'     => \Yii::t('auth', 'Last login'),
+            'confirmed_at'      => \Yii::t('auth', 'Confirmation time'),
         ];
     }
 
@@ -230,7 +230,7 @@ class User extends ActiveRecord implements IdentityInterface
             'usernameUnique'   => [
                 'username',
                 'unique',
-                'message' => \Yii::t('user', 'This username has already been taken')
+                'message' => \Yii::t('auth', 'This username has already been taken')
             ],
             'usernameTrim'     => ['username', 'trim'],
 
@@ -241,7 +241,7 @@ class User extends ActiveRecord implements IdentityInterface
             'emailUnique'   => [
                 'email',
                 'unique',
-                'message' => \Yii::t('user', 'This email address has already been taken')
+                'message' => \Yii::t('auth', 'This email address has already been taken')
             ],
             'emailTrim'     => ['email', 'trim'],
 
@@ -354,13 +354,13 @@ class User extends ActiveRecord implements IdentityInterface
             $token->delete();
             if (($success = $this->confirm())) {
                 \Yii::$app->user->login($this, $this->module->rememberFor);
-                $message = \Yii::t('user', 'Thank you, registration is now complete.');
+                $message = \Yii::t('auth', 'Thank you, registration is now complete.');
             } else {
-                $message = \Yii::t('user', 'Something went wrong and your account has not been confirmed.');
+                $message = \Yii::t('auth', 'Something went wrong and your account has not been confirmed.');
             }
         } else {
             $success = false;
-            $message = \Yii::t('user', 'The confirmation link is invalid or expired. Please try requesting a new one.');
+            $message = \Yii::t('auth', 'The confirmation link is invalid or expired. Please try requesting a new one.');
         }
 
         \Yii::$app->session->setFlash($success ? 'success' : 'danger', $message);
@@ -404,12 +404,12 @@ class User extends ActiveRecord implements IdentityInterface
         ])->andWhere(['in', 'type', [Token::TYPE_CONFIRM_NEW_EMAIL, Token::TYPE_CONFIRM_OLD_EMAIL]])->one();
 
         if (empty($this->unconfirmed_email) || $token === null || $token->isExpired) {
-            \Yii::$app->session->setFlash('danger', \Yii::t('user', 'Your confirmation token is invalid or expired'));
+            \Yii::$app->session->setFlash('danger', \Yii::t('auth', 'Your confirmation token is invalid or expired'));
         } else {
             $token->delete();
 
             if (empty($this->unconfirmed_email)) {
-                \Yii::$app->session->setFlash('danger', \Yii::t('user', 'An error occurred processing your request'));
+                \Yii::$app->session->setFlash('danger', \Yii::t('auth', 'An error occurred processing your request'));
             } elseif ($this->finder->findUser(['email' => $this->unconfirmed_email])->exists() == false) {
                 if ($this->module->emailChangeStrategy == Module::STRATEGY_SECURE) {
                     switch ($token->type) {
@@ -439,7 +439,7 @@ class User extends ActiveRecord implements IdentityInterface
                     || ($this->flags & self::NEW_EMAIL_CONFIRMED && $this->flags & self::OLD_EMAIL_CONFIRMED)) {
                     $this->email = $this->unconfirmed_email;
                     $this->unconfirmed_email = null;
-                    \Yii::$app->session->setFlash('success', \Yii::t('user', 'Your email address has been changed'));
+                    \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Your email address has been changed'));
                 }
                 $this->save(false);
             }

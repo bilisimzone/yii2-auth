@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
  * @var yii\widgets\ActiveForm $form
  * @var coreb2c\auth\models\Profile $model
  */
-$this->title = Yii::t('user', 'Profile settings');
+$this->title = Yii::t('auth', 'Profile settings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -69,14 +69,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=
                         $form
                         ->field($model, 'gravatar_email')
-                        ->hint(Html::a(Yii::t('user', 'Change your avatar at Gravatar.com'), 'http://gravatar.com'))
+                        ->hint(Html::a(Yii::t('auth', 'Change your avatar at Gravatar.com'), 'http://gravatar.com'))
                 ?>
 
                 <?= $form->field($model, 'bio')->textarea() ?>
 
                 <div class="form-group">
                     <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?>
+                        <?= Html::submitButton(Yii::t('auth', 'Save'), ['class' => 'btn btn-block btn-success']) ?>
                         <br>
                     </div>
                 </div>

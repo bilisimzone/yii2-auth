@@ -49,13 +49,20 @@ class Bootstrap implements BootstrapInterface {
     /** @inheritdoc */
     public function bootstrap($app) {
         // register translations
-        if (!isset($app->get('i18n')->translations['rbac*'])) {
-            $app->get('i18n')->translations['rbac*'] = [
+        if (!isset($app->get('i18n')->translations['auth*'])) {
+            $app->get('i18n')->translations['auth*'] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => __DIR__ . '/messages',
                 'sourceLanguage' => 'en-US',
             ];
         }
+//        if (!isset($app->get('i18n')->translations['user*'])) {
+//            $app->get('i18n')->translations['user*'] = [
+//                'class' => PhpMessageSource::className(),
+//                'basePath' => __DIR__ . '/messages',
+//                'sourceLanguage' => 'en-US'
+//            ];
+//        }
         $authManager = $app->get('authManager', false);
 
         if (!$authManager) {
@@ -118,15 +125,6 @@ class Bootstrap implements BootstrapInterface {
                     ]);
                 }
             }
-
-            if (!isset($app->get('i18n')->translations['user*'])) {
-                $app->get('i18n')->translations['user*'] = [
-                    'class' => PhpMessageSource::className(),
-                    'basePath' => __DIR__ . '/messages',
-                    'sourceLanguage' => 'en-US'
-                ];
-            }
-
             Yii::$container->set('coreb2c\auth\Mailer', $module->mailer);
 
             $module->debug = $this->ensureCorrectDebugSetting();

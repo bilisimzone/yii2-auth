@@ -44,6 +44,6 @@ class Yandex extends BaseYandex implements ClientInterface
     /** @inheritdoc */
     protected function defaultTitle()
     {
-        return Yii::t('user', 'Yandex');
+        return Yii::t('auth', 'Yandex');
     }
 }

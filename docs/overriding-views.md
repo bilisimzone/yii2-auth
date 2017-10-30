@@ -40,7 +40,7 @@ use yii\widgets\ActiveForm;
  * @var coreb2c\auth\models\User $user
  */
 
-$this->title = Yii::t('user', 'Sign up');
+$this->title = Yii::t('auth', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="alert alert-success">
@@ -63,13 +63,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <?= Html::submitButton(Yii::t('user', 'Sign up'), ['class' => 'btn btn-success btn-block']) ?>
+                <?= Html::submitButton(Yii::t('auth', 'Sign up'), ['class' => 'btn btn-success btn-block']) ?>
 
                 <?php ActiveForm::end(); ?>
             </div>
         </div>
         <p class="text-center">
-            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/auth/security/login']) ?>
+            <?= Html::a(Yii::t('auth', 'Already registered? Sign in!'), ['/auth/security/login']) ?>
         </p>
     </div>
 </div>

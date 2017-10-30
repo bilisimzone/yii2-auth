@@ -86,7 +86,7 @@ class SettingsForm extends Model
             'currentPasswordRequired' => ['current_password', 'required'],
             'currentPasswordValidate' => ['current_password', function ($attr) {
                 if (!Password::validate($this->$attr, $this->user->password_hash)) {
-                    $this->addError($attr, Yii::t('user', 'Current password is not valid'));
+                    $this->addError($attr, Yii::t('auth', 'Current password is not valid'));
                 }
             }],
         ];
@@ -96,10 +96,10 @@ class SettingsForm extends Model
     public function attributeLabels()
     {
         return [
-            'email'            => Yii::t('user', 'Email'),
-            'username'         => Yii::t('user', 'Username'),
-            'new_password'     => Yii::t('user', 'New password'),
-            'current_password' => Yii::t('user', 'Current password'),
+            'email'            => Yii::t('auth', 'Email'),
+            'username'         => Yii::t('auth', 'Username'),
+            'new_password'     => Yii::t('auth', 'New password'),
+            'current_password' => Yii::t('auth', 'Current password'),
         ];
     }
 
@@ -150,7 +150,7 @@ class SettingsForm extends Model
     protected function insecureEmailChange()
     {
         $this->user->email = $this->email;
-        Yii::$app->session->setFlash('success', Yii::t('user', 'Your email address has been changed'));
+        Yii::$app->session->setFlash('success', Yii::t('auth', 'Your email address has been changed'));
     }
 
     /**
@@ -169,7 +169,7 @@ class SettingsForm extends Model
         $this->mailer->sendReconfirmationMessage($this->user, $token);
         Yii::$app->session->setFlash(
             'info',
-            Yii::t('user', 'A confirmation message has been sent to your new email address')
+            Yii::t('auth', 'A confirmation message has been sent to your new email address')
         );
     }
 

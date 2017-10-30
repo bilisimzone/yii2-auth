@@ -70,9 +70,9 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'login'      => Yii::t('user', 'Login'),
-            'password'   => Yii::t('user', 'Password'),
-            'rememberMe' => Yii::t('user', 'Remember me next time'),
+            'login'      => Yii::t('auth', 'Login'),
+            'password'   => Yii::t('auth', 'Password'),
+            'rememberMe' => Yii::t('auth', 'Remember me next time'),
         ];
     }
 
@@ -89,10 +89,10 @@ class LoginForm extends Model
                         $confirmationRequired = $this->module->enableConfirmation
                             && !$this->module->enableUnconfirmedLogin;
                         if ($confirmationRequired && !$this->user->getIsConfirmed()) {
-                            $this->addError($attribute, Yii::t('user', 'You need to confirm your email address'));
+                            $this->addError($attribute, Yii::t('auth', 'You need to confirm your email address'));
                         }
                         if ($this->user->getIsBlocked()) {
-                            $this->addError($attribute, Yii::t('user', 'Your account has been blocked'));
+                            $this->addError($attribute, Yii::t('auth', 'Your account has been blocked'));
                         }
                     }
                 }
@@ -107,7 +107,7 @@ class LoginForm extends Model
                     'password',
                     function ($attribute) {
                         if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
-                            $this->addError($attribute, Yii::t('user', 'Invalid login or password'));
+                            $this->addError($attribute, Yii::t('auth', 'Invalid login or password'));
                         }
                     }
                 ]
@@ -126,7 +126,7 @@ class LoginForm extends Model
     public function validatePassword($attribute, $params)
     {
       if ($this->user === null || !Password::validate($this->password, $this->user->password_hash))
-        $this->addError($attribute, Yii::t('user', 'Invalid login or password'));
+        $this->addError($attribute, Yii::t('auth', 'Invalid login or password'));
     }
 
     /**

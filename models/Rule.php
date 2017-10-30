@@ -91,22 +91,22 @@ class Rule extends Model
                 $rule = $this->authManager->getRule($this->name);
 
                 if ($rule instanceof \yii\auth\Rule) {
-                    $this->addError('name', \Yii::t('rbac', 'Name is already in use'));
+                    $this->addError('name', \Yii::t('auth', 'Name is already in use'));
                 }
             }],
             ['class', function () {
                 if (!class_exists($this->class)) {
-                    $this->addError('class', \Yii::t('rbac', 'Class "{0}" does not exist', $this->class));
+                    $this->addError('class', \Yii::t('auth', 'Class "{0}" does not exist', $this->class));
                 } else {
                     try {
                         $class = '\yii\auth\Rule';
                         $rule  = \Yii::createObject($this->class);
 
                         if (!($rule instanceof $class)) {
-                            $this->addError('class', \Yii::t('rbac', 'Rule class must extend "yii\rbac\Rule"'));
+                            $this->addError('class', \Yii::t('auth', 'Rule class must extend "yii\rbac\Rule"'));
                         }
                     } catch (InvalidConfigException $e) {
-                        $this->addError('class', \Yii::t('rbac', 'Rule class can not be instantiated'));
+                        $this->addError('class', \Yii::t('auth', 'Rule class can not be instantiated'));
                     }
                 }
             }],

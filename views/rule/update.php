@@ -14,8 +14,8 @@
  * @var $this  \yii\web\View
  */
 
-$this->title = Yii::t('rbac', 'Update rule');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac', 'Rules'), 'url' => ['index']];
+$this->title = Yii::t('auth', 'Update rule');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('auth', 'Rules'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

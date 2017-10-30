@@ -39,40 +39,40 @@ class Menu extends Nav
 
         $this->items = [
             [
-                'label'   => \Yii::t('rbac', 'Users'),
+                'label'   => \Yii::t('auth', 'Users'),
                 'url'     => ['/auth/admin/index'],
                 'visible' => $isUserModuleInstalled,
             ],
             [
-                'label' => \Yii::t('rbac', 'Roles'),
+                'label' => \Yii::t('auth', 'Roles'),
                 'url'   => ['/auth/role/index'],
             ],
             [
-                'label' => \Yii::t('rbac', 'Permissions'),
+                'label' => \Yii::t('auth', 'Permissions'),
                 'url'   => ['/auth/permission/index'],
             ],
             [
-                'label' => \Yii::t('rbac', 'Rules'),
+                'label' => \Yii::t('auth', 'Rules'),
                 'url'   => ['/auth/rule/index'],
             ],
             [
-                'label' => \Yii::t('rbac', 'Create'),
+                'label' => \Yii::t('auth', 'Create'),
                 'items' => [
                     [
-                        'label'   =>\ Yii::t('rbac', 'New user'),
+                        'label'   =>\ Yii::t('auth', 'New user'),
                         'url'     => ['/auth/admin/create'],
                         'visible' => $isUserModuleInstalled,
                     ],
                     [
-                        'label' => \Yii::t('rbac', 'New role'),
+                        'label' => \Yii::t('auth', 'New role'),
                         'url'   => ['/auth/role/create']
                     ],
                     [
-                        'label' => \Yii::t('rbac', 'New permission'),
+                        'label' => \Yii::t('auth', 'New permission'),
                         'url'   => ['/auth/permission/create']
                     ],
                     [
-                        'label' => \Yii::t('rbac', 'New rule'),
+                        'label' => \Yii::t('auth', 'New rule'),
                         'url'   => ['/auth/rule/create']
                     ]
                 ]
