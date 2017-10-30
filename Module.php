@@ -62,9 +62,12 @@ class Module extends BaseModule {
     /** @var bool Enable the 'impersonate as another user' function */
     public $enableImpersonateUser = true;
 
+    /** @var bool Whether role base access control (rbac) enabled. */
+    public $emailRbac = true;
+    
     /** @var int Email changing strategy. */
     public $emailChangeStrategy = self::STRATEGY_DEFAULT;
-
+    
     /** @var int The time you want the user will be remembered without asking for credentials. */
     public $rememberFor = 1209600; // two weeks
 

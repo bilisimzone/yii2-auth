@@ -56,21 +56,16 @@ class Bootstrap implements BootstrapInterface {
                 'sourceLanguage' => 'en-US',
             ];
         }
-//        if (!isset($app->get('i18n')->translations['user*'])) {
-//            $app->get('i18n')->translations['user*'] = [
-//                'class' => PhpMessageSource::className(),
-//                'basePath' => __DIR__ . '/messages',
-//                'sourceLanguage' => 'en-US'
-//            ];
-//        }
-        $authManager = $app->get('authManager', false);
+        if ($this->checkRbacEnabled($app)) {
+            $authManager = $app->get('authManager', false);
 
-        if (!$authManager) {
-            $app->set('authManager', [
-                'class' => DbManager::className(),
-            ]);
-        } else if (!($authManager instanceof ManagerInterface)) {
-            throw new InvalidConfigException('You have wrong authManager configuration');
+            if (!$authManager) {
+                $app->set('authManager', [
+                    'class' => DbManager::className(),
+                ]);
+            } else if (!($authManager instanceof ManagerInterface)) {
+                throw new InvalidConfigException('You have wrong authManager configuration');
+            }
         }
 
         /** @var Module $module */
@@ -128,6 +123,19 @@ class Bootstrap implements BootstrapInterface {
             Yii::$container->set('coreb2c\auth\Mailer', $module->mailer);
 
             $module->debug = $this->ensureCorrectDebugSetting();
+        }
+    }
+
+    /**
+     * Verifies that coreb2c/yii2-rbac is enabled
+     * @param  Application $app
+     * @return bool
+     */
+    protected function checkRbacEnabled(Application $app) {
+        if ($app instanceof WebApplication) {
+            return $app->hasModule('auth') && $app->getModule('auth') instanceof RbacWebModule && $app->getModule('auth')->enableRbac;
+        } else {
+            return $app->hasModule('auth') && $app->getModule('auth') instanceof AuthConsoleModule;
         }
     }
 
