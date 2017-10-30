@@ -24,7 +24,7 @@ use yii\base\Component;
 class Mailer extends Component
 {
     /** @var string */
-    public $viewPath = '@coreb2c/user/views/mail';
+    public $viewPath = '@coreb2c/auth/views/mail';
 
     /** @var string|array Default: `Yii::$app->params['adminEmail']` OR `no-reply@example.com` */
     public $sender;

@@ -17,7 +17,7 @@ message on a blank page:
         'registration' => [
             'class' => \coreb2c\auth\controllers\RegistrationController::className(),
             'on ' . \coreb2c\auth\controllers\RegistrationController::EVENT_AFTER_REGISTER => function ($e) {
-                Yii::$app->response->redirect(array('/user/security/login'))->send();
+                Yii::$app->response->redirect(array('/auth/security/login'))->send();
                 Yii::$app->end();
             }
         ],

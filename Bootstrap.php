@@ -68,7 +68,7 @@ class Bootstrap implements BootstrapInterface {
 
         /** @var Module $module */
         /** @var \yii\db\ActiveRecord $modelName */
-        if ($app->hasModule('user') && ($module = $app->getModule('auth')) instanceof Module) {
+        if ($app->hasModule('auth') && ($module = $app->getModule('auth')) instanceof Module) {
             $this->_modelMap = array_merge($this->_modelMap, $module->modelMap);
             foreach ($this->_modelMap as $name => $definition) {
                 $class = "coreb2c\\auth\\models\\" . $name;
@@ -94,7 +94,7 @@ class Bootstrap implements BootstrapInterface {
             } else {
                 Yii::$container->set('yii\web\User', [
                     'enableAutoLogin' => true,
-                    'loginUrl' => ['/user/security/login'],
+                    'loginUrl' => ['/auth/security/login'],
                     'identityClass' => $module->modelMap['User'],
                 ]);
 

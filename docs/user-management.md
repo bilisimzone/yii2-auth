@@ -21,36 +21,36 @@ To start using user management interface you have to add your username to admini
 
 ### Show users
 
-Route **/user/admin/index** shows a list of registered users. You will be able to see a lot of useful information such
+Route **/auth/admin/index** shows a list of registered users. You will be able to see a lot of useful information such
 as registration time and ip address, confirmation and block status, etc.
 
 ### Create user
 
-Route **/user/admin/create** shows create user form. To create a new user account you have to fill username and email
+Route **/auth/admin/create** shows create user form. To create a new user account you have to fill username and email
 fields. If you do not want to create password for user leave password field empty, password will be generated automatically.
 After create a welcome message will be sent to email that you have used to create user. It will contain user's credentials.
 
 ### Update user
 
-Route **/user/admin/update** shows update user form. From that page you will be able to update account (email, username,
+Route **/auth/admin/update** shows update user form. From that page you will be able to update account (email, username,
 password) and profile (name, location, etc) information, block and confirm user. To access this route you should specify
 id query parameter.
 
 ### Delete user
 
-Route **/user/admin/delete** deletes an user account. To access this route you should specify id query parameter and do
+Route **/auth/admin/delete** deletes an user account. To access this route you should specify id query parameter and do
 a POST request. Be careful, you will not be able to restore deleted account.
 
 ### Impersonate User / Become another user
 
-Route **/user/admin/switch** becomes an user for the current session. You need to be an administrator to use this
+Route **/auth/admin/switch** becomes an user for the current session. You need to be an administrator to use this
 feature. Place something like this in your view file to allow to jump back when being impersonated as another person:
 
 ```
 if (Yii::$app->session->has(\coreb2c\auth\controllers\AdminController::ORIGINAL_USER_SESSION_KEY))
     echo Html::a(
     '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('main', 'Back to original user'),
-     ['/user/admin/switch'], ['class' => 'btn btn-primary', 'data-method' => 'POST']);
+     ['/auth/admin/switch'], ['class' => 'btn btn-primary', 'data-method' => 'POST']);
 ```
 
 or
@@ -60,7 +60,7 @@ echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => [
         Yii::$app->session->has(\coreb2c\auth\controllers\AdminController::ORIGINAL_USER_SESSION_KEY) ?
-        '<li>' . Html::beginForm(['/user/admin/switch'], 'post', ['class' => 'navbar-form'])
+        '<li>' . Html::beginForm(['/auth/admin/switch'], 'post', ['class' => 'navbar-form'])
             . Html::submitButton('<span class="glyphicon glyphicon-user"></span> ' . Yii::t('user', 'Back to original user'),
                 ['class' => 'btn btn-link']
             ) . Html::endForm() . '</li>' : '',

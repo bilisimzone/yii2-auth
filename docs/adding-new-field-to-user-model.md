@@ -58,7 +58,7 @@ class User extends \coreb2c\auth\models\User
 
 ## Adding field to the admin form
 
-You should override view file `@coreb2c/user/views/admin/_user.php` as described in [special guide](overriding-views.md)
+You should override view file `@coreb2c/auth/views/admin/_user.php` as described in [special guide](overriding-views.md)
 with the following content:
 
 ```php
@@ -144,7 +144,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <p class="text-center">
-            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
+            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/auth/security/login']) ?>
         </p>
     </div>
 </div>

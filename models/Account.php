@@ -84,7 +84,7 @@ class Account extends ActiveRecord {
         $code = \Yii::$app->security->generateRandomString();
         $this->updateAttributes(['code' => md5($code)]);
 
-        return Url::to(['/user/registration/connect', 'code' => $code]);
+        return Url::to(['/auth/registration/connect', 'code' => $code]);
     }
 
     public function connect(User $user) {

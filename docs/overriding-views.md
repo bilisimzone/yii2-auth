@@ -10,7 +10,7 @@ configure your view application component as follows:
     'view' => [
         'theme' => [
             'pathMap' => [
-                '@coreb2c/user/views' => '@app/views/user'
+                '@coreb2c/auth/views' => '@app/views/auth'
             ],
         ],
     ],
@@ -18,7 +18,7 @@ configure your view application component as follows:
 ...
 ```
 
-In the above `pathMap` means that every view in @coreb2c/user/views will be first searched under `@app/views/user` and
+In the above `pathMap` means that every view in @coreb2c/auth/views will be first searched under `@app/views/auth` and
 if a view exists in the theme directory it will be used instead of the original view.
 
 ## Example
@@ -26,7 +26,7 @@ if a view exists in the theme directory it will be used instead of the original 
 An example of overriding the registration page view is demonstrated below. First make sure you have configured view
 application component.
 
-In order to override the registration view file you should create `@app/views/user/registration/register.php`. Open it
+In order to override the registration view file you should create `@app/views/auth/registration/register.php`. Open it
 and paste in the following code:
 
 ```php
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <p class="text-center">
-            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
+            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/auth/security/login']) ?>
         </p>
     </div>
 </div>

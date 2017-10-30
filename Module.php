@@ -95,7 +95,7 @@ class Module extends BaseModule {
      *
      * @See [[GroupUrlRule::prefix]]
      */
-    public $urlPrefix = 'user';
+    public $urlPrefix = 'auth';
 
     /**
      * @var bool Is the user module in DEBUG mode? Will be set to false automatically

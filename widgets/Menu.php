@@ -40,7 +40,7 @@ class Menu extends Nav
         $this->items = [
             [
                 'label'   => \Yii::t('rbac', 'Users'),
-                'url'     => ['/user/admin/index'],
+                'url'     => ['/auth/admin/index'],
                 'visible' => $isUserModuleInstalled,
             ],
             [
@@ -60,7 +60,7 @@ class Menu extends Nav
                 'items' => [
                     [
                         'label'   =>\ Yii::t('rbac', 'New user'),
-                        'url'     => ['/user/admin/create'],
+                        'url'     => ['/auth/admin/create'],
                         'visible' => $isUserModuleInstalled,
                     ],
                     [

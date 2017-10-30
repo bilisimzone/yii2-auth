@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <p class="text-center">
-            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
+            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/auth/security/login']) ?>
         </p>
     </div>
 </div>

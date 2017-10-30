@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             . ($module->enablePasswordRecovery ?
                                 ' (' . Html::a(
                                     Yii::t('user', 'Forgot password?'),
-                                    ['/user/recovery/request'],
+                                    ['/auth/recovery/request'],
                                     ['tabindex' => '5']
                                 )
                                 . ')' : '')
@@ -93,16 +93,16 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <?php if ($module->enableConfirmation): ?>
             <p class="text-center">
-                <?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
+                <?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/auth/registration/resend']) ?>
             </p>
         <?php endif ?>
         <?php if ($module->enableRegistration): ?>
             <p class="text-center">
-                <?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
+                <?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/auth/registration/register']) ?>
             </p>
         <?php endif ?>
         <?= Connect::widget([
-            'baseAuthUrl' => ['/user/security/auth'],
+            'baseAuthUrl' => ['/auth/security/auth'],
         ]) ?>
     </div>
 </div>

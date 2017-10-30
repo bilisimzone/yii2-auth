@@ -26,7 +26,7 @@ use yii\helpers\Html;
 
     $form = ActiveForm::begin([
                 'id' => 'login-widget-form',
-                'action' => Url::to(['/user/security/login']),
+                'action' => Url::to(['/auth/security/login']),
                 'enableAjaxValidation' => true,
                 'enableClientValidation' => false,
                 'validateOnBlur' => false,
@@ -47,7 +47,7 @@ use yii\helpers\Html;
 <?php else: ?>
     <?=
 
-    Html::a(Yii::t('user', 'Logout'), ['/user/security/logout'], [
+    Html::a(Yii::t('user', 'Logout'), ['/auth/security/logout'], [
         'class' => 'btn btn-danger btn-block',
         'data-method' => 'post'
     ])

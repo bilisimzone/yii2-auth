@@ -1,6 +1,6 @@
 <?php
 
-namespace coreb2c\Auth;
+namespace coreb2c\auth;
 
 use yii\base\Module;
 

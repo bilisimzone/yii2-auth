@@ -17,7 +17,7 @@ use coreb2c\auth\widgets\Assignments;
  */
 ?>
 
-<?php $this->beginContent('@coreb2c/user/views/admin/update.php', ['user' => $user]) ?>
+<?php $this->beginContent('@coreb2c/auth/views/admin/update.php', ['user' => $user]) ?>
 
 <?= yii\bootstrap\Alert::widget([
     'options' => [

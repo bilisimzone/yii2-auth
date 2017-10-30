@@ -19,7 +19,7 @@ use yii\helpers\Html;
  */
 ?>
 
-<?php $this->beginContent('@coreb2c/user/views/admin/update.php', ['user' => $user]) ?>
+<?php $this->beginContent('@coreb2c/auth/views/admin/update.php', ['user' => $user]) ?>
 
 <?php $form = ActiveForm::begin([
     'layout' => 'horizontal',

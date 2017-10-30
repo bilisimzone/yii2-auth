@@ -48,7 +48,7 @@ public property named **captcha** and validation rules.
 ## 2. Adding widget to the view
 
 Before doing this step you have to configure view application component as described in guide. After this done you have
-to create new file named `register.php` in `@app/views/user/registration`. Now you have to add widget to registration
+to create new file named `register.php` in `@app/views/auth/registration`. Now you have to add widget to registration
 form, just copy and paste following code into newly created view file.
 
 ```php
@@ -94,7 +94,7 @@ form, just copy and paste following code into newly created view file.
                 </div>
             </div>
             <p class="text-center">
-                <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
+                <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/auth/security/login']) ?>
             </p>
         </div>
     </div>

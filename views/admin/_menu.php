@@ -21,7 +21,7 @@ use yii\bootstrap\Nav;
     'items' => [
         [
             'label' => Yii::t('user', 'Users'),
-            'url' => ['/user/admin/index'],
+            'url' => ['/auth/admin/index'],
         ],
         [
             'label' => Yii::t('user', 'Roles'),
@@ -43,7 +43,7 @@ use yii\bootstrap\Nav;
             'items' => [
                 [
                     'label' => Yii::t('user', 'New user'),
-                    'url' => ['/user/admin/create'],
+                    'url' => ['/auth/admin/create'],
                 ],
                 [
                     'label' => Yii::t('user', 'New role'),

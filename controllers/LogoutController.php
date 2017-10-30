@@ -130,7 +130,7 @@ class LogoutController extends Controller
 
         if (!$this->module->enableRegistration && ($account === null || $account->user === null)) {
             \Yii::$app->session->setFlash('danger', \Yii::t('user', 'Registration on this website is disabled'));
-            $this->action->successUrl = Url::to(['/user/security/login']);
+            $this->action->successUrl = Url::to(['/auth/security/login']);
             return;
         }
 
@@ -147,7 +147,7 @@ class LogoutController extends Controller
         if ($account->user instanceof User) {
             if ($account->user->isBlocked) {
                 \Yii::$app->session->setFlash('danger', \Yii::t('user', 'Your account has been blocked.'));
-                $this->action->successUrl = Url::to(['/user/security/login']);
+                $this->action->successUrl = Url::to(['/auth/security/login']);
             } else {
                 \Yii::$app->user->login($account->user, $this->module->rememberFor);
                 $this->action->successUrl = \Yii::$app->getUser()->getReturnUrl();
@@ -176,6 +176,6 @@ class LogoutController extends Controller
 
         $this->trigger(self::EVENT_AFTER_CONNECT, $event);
 
-        $this->action->successUrl = Url::to(['/user/settings/networks']);
+        $this->action->successUrl = Url::to(['/auth/settings/networks']);
     }
 }

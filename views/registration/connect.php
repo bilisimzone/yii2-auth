@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'user',
                     'If you already registered, sign in and connect this account on settings page'
                 ),
-                ['/user/settings/networks']
+                ['/auth/settings/networks']
             ) ?>.
         </p>
     </div>
