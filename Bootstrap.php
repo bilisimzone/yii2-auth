@@ -133,7 +133,7 @@ class Bootstrap implements BootstrapInterface {
      */
     protected function checkRbacEnabled(Application $app) {
         if ($app instanceof WebApplication) {
-            return $app->hasModule('auth') && $app->getModule('auth') instanceof RbacWebModule && $app->getModule('auth')->enableRbac;
+            return $app->hasModule('auth') && $app->getModule('auth') instanceof Module && $app->getModule('auth')->enableRbac;
         } else {
             return $app->hasModule('auth') && $app->getModule('auth') instanceof AuthConsoleModule;
         }
