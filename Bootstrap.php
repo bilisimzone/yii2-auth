@@ -68,10 +68,10 @@ class Bootstrap implements BootstrapInterface {
 
         /** @var Module $module */
         /** @var \yii\db\ActiveRecord $modelName */
-        if ($app->hasModule('user') && ($module = $app->getModule('user')) instanceof Module) {
+        if ($app->hasModule('user') && ($module = $app->getModule('auth')) instanceof Module) {
             $this->_modelMap = array_merge($this->_modelMap, $module->modelMap);
             foreach ($this->_modelMap as $name => $definition) {
-                $class = "coreb2c\\user\\models\\" . $name;
+                $class = "coreb2c\\auth\\models\\" . $name;
                 Yii::$container->set($class, $definition);
                 $modelName = is_array($definition) ? $definition['class'] : $definition;
                 $module->modelMap[$name] = $modelName;
@@ -148,7 +148,7 @@ class Bootstrap implements BootstrapInterface {
             return false;
         }
 
-        return Yii::$app->getModule('user')->debug;
+        return Yii::$app->getModule('auth')->debug;
     }
 
     /**

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\validators;
+namespace coreb2c\auth\validators;
 
 use yii\validators\Validator;
 
@@ -18,7 +18,7 @@ use yii\validators\Validator;
  */
 class RbacValidator extends Validator
 {
-    /** @var \coreb2c\rbac\components\DbManager */
+    /** @var \coreb2c\auth\components\DbManager */
     protected $manager;
     
     /** @inheritdoc */

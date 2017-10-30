@@ -11,7 +11,7 @@
 
 /**
  * @var $this  yii\web\View
- * @var $model coreb2c\rbac\models\Role
+ * @var $model coreb2c\auth\models\Role
  */
 
 use kartik\select2\Select2;

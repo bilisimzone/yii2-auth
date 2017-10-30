@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\widgets;
+namespace coreb2c\auth\widgets;
 
-use coreb2c\rbac\components\DbManager;
-use coreb2c\rbac\models\Assignment;
+use coreb2c\auth\components\DbManager;
+use coreb2c\auth\models\Assignment;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;

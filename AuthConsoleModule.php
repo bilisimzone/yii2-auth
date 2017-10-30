@@ -14,5 +14,5 @@ class AuthConsoleModule extends Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'coreb2c\rbac\commands';
+    public $controllerNamespace = 'coreb2c\auth\commands';
 }

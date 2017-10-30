@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\controllers;
+namespace coreb2c\auth\controllers;
 
 use yii\rbac\Role;
 use yii\web\NotFoundHttpException;
@@ -21,7 +21,7 @@ use yii\rbac\Item;
 class RoleController extends ItemControllerAbstract
 {
     /** @var string */
-    protected $modelClass = 'coreb2c\rbac\models\Role';
+    protected $modelClass = 'coreb2c\auth\models\Role';
     
     protected $type = Item::TYPE_ROLE;
 

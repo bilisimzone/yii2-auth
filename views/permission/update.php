@@ -10,7 +10,7 @@
  */
 
 /**
- * @var $model coreb2c\rbac\models\Role
+ * @var $model coreb2c\auth\models\Role
  * @var $this  yii\web\View
  */
 

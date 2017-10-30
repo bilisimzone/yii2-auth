@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\models;
+namespace coreb2c\auth\models;
 
 use yii\rbac\Item;
 

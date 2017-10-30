@@ -39,7 +39,7 @@ class Profile extends ActiveRecord
     /** @inheritdoc */
     public function init()
     {
-        $this->module = \Yii::$app->getModule('user');
+        $this->module = \Yii::$app->getModule('auth');
     }
 
     /**

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use coreb2c\rbac\widgets\Assignments;
+use coreb2c\auth\widgets\Assignments;
 
 /**
  * @var yii\web\View $this

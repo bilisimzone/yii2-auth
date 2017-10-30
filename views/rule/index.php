@@ -11,7 +11,7 @@
 
 /**
  * @var $this         \yii\web\View
- * @var $searchModel  \coreb2c\rbac\models\RuleSearch
+ * @var $searchModel  \coreb2c\auth\models\RuleSearch
  * @var $dataProvider \yii\data\ArrayDataProvider
  */
 

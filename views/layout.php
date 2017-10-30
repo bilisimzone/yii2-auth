@@ -14,7 +14,7 @@
  * @var $content string
  */
 
-use coreb2c\rbac\widgets\Menu;
+use coreb2c\auth\widgets\Menu;
 
 ?>
 

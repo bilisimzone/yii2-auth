@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\controllers;
+namespace coreb2c\auth\controllers;
 
 use yii\rbac\Permission;
 use yii\web\NotFoundHttpException;
@@ -21,7 +21,7 @@ use yii\rbac\Item;
 class PermissionController extends ItemControllerAbstract
 {
     /** @var string */
-    protected $modelClass = 'coreb2c\rbac\models\Permission';
+    protected $modelClass = 'coreb2c\auth\models\Permission';
     
     /** @var int */
     protected $type = Item::TYPE_PERMISSION;

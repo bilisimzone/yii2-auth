@@ -10,7 +10,7 @@
  */
 
 
-namespace coreb2c\rbac\commands;
+namespace coreb2c\auth\commands;
 
 use yii\console\controllers\BaseMigrateController;
 use yii\db\Connection;

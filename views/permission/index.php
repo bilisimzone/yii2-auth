@@ -12,7 +12,7 @@
 /**
  * @var $dataProvider array
  * @var $this         yii\web\View
- * @var $filterModel  coreb2c\rbac\models\Search
+ * @var $filterModel  coreb2c\auth\models\Search
  */
 
 use kartik\select2\Select2;

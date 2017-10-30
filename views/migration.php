@@ -16,7 +16,7 @@
 echo "<?php\n";
 ?>
 
-use coreb2c\rbac\migrations\Migration;
+use coreb2c\auth\migrations\Migration;
 
 class <?= $className ?> extends Migration
 {

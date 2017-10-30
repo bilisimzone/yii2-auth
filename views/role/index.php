@@ -11,7 +11,7 @@
 
 /**
  * @var $dataProvider array
- * @var $filterModel  coreb2c\rbac\models\Search
+ * @var $filterModel  coreb2c\auth\models\Search
  * @var $this         yii\web\View
  */
 

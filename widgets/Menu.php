@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\widgets;
+namespace coreb2c\auth\widgets;
 
 use yii\bootstrap\Nav;
 
@@ -34,8 +34,8 @@ class Menu extends Nav
     {
         parent::init();
 
-        $userModuleClass       = 'coreb2c\user\Module';
-        $isUserModuleInstalled = \Yii::$app->getModule('user') instanceof $userModuleClass;
+        $userModuleClass       = 'coreb2c\auth\Module';
+        $isUserModuleInstalled = \Yii::$app->getModule('auth') instanceof $userModuleClass;
 
         $this->items = [
             [

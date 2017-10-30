@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\controllers;
+namespace coreb2c\auth\controllers;
 
 use yii\base\InvalidConfigException;
 use yii\base\Model;
@@ -17,7 +17,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
-use coreb2c\rbac\models\Search;
+use coreb2c\auth\models\Search;
 
 /**
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
@@ -26,7 +26,7 @@ abstract class ItemControllerAbstract extends Controller
 {
     /**
      * @param  string $name
-     * @return \coreb2c\rbac\models\Role|\coreb2c\rbac\models\Permission
+     * @return \coreb2c\auth\models\Role|\coreb2c\auth\models\Permission
      */
     abstract protected function getItem($name);
 
@@ -74,7 +74,7 @@ abstract class ItemControllerAbstract extends Controller
      */
     public function actionCreate()
     {
-        /** @var \coreb2c\rbac\models\Role|\coreb2c\rbac\models\Permission $model */
+        /** @var \coreb2c\auth\models\Role|\coreb2c\auth\models\Permission $model */
         $model = \Yii::createObject([
             'class'    => $this->modelClass,
             'scenario' => 'create',
@@ -100,7 +100,7 @@ abstract class ItemControllerAbstract extends Controller
      */
     public function actionUpdate($name)
     {
-        /** @var \coreb2c\rbac\models\Role|\coreb2c\rbac\models\Permission $model */
+        /** @var \coreb2c\auth\models\Role|\coreb2c\auth\models\Permission $model */
         $item  = $this->getItem($name);
         $model = \Yii::createObject([
             'class'    => $this->modelClass,

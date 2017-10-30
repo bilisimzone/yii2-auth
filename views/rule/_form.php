@@ -11,7 +11,7 @@
 
 /**
  * @var $this  \yii\web\View
- * @var $model \coreb2c\rbac\models\Rule
+ * @var $model \coreb2c\auth\models\Rule
  */
 
 use yii\widgets\ActiveForm;

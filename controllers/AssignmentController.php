@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\controllers;
+namespace coreb2c\auth\controllers;
 
-use coreb2c\rbac\models\Assignment;
+use coreb2c\auth\models\Assignment;
 use Yii;
 use yii\web\Controller;
 
@@ -35,7 +35,7 @@ class AssignmentController extends Controller
         if ($model->load(\Yii::$app->request->post()) && $model->updateAssignments()) {
         }
 
-        return \coreb2c\rbac\widgets\Assignments::widget([
+        return \coreb2c\auth\widgets\Assignments::widget([
             'model' => $model,
         ]);
         /*$model = Yii::createObject([

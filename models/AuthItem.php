@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\models;
+namespace coreb2c\auth\models;
 
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
 use yii\base\Model;
 use yii\helpers\Json;
 use yii\rbac\Item;
-use coreb2c\rbac\validators\RbacValidator;
+use coreb2c\auth\validators\RbacValidator;
 
 /**
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
@@ -59,7 +59,7 @@ abstract class AuthItem extends Model
     public $item;
 
     /**
-     * @var \coreb2c\rbac\components\DbManager
+     * @var \coreb2c\auth\components\DbManager
      */
     protected $manager;
 

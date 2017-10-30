@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\models;
+namespace coreb2c\auth\models;
 
-use coreb2c\rbac\components\DbManager;
+use coreb2c\auth\components\DbManager;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\di\Instance;

@@ -26,7 +26,6 @@ class AccessRule extends \yii\filters\AccessRule
         if (empty($this->roles)) {
             return true;
         }
-
         foreach ($this->roles as $role) {
             if ($role === '?') {
                 if (\Yii::$app->user->isGuest) {

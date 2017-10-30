@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use coreb2c\rbac\models\Assignment;
+use coreb2c\auth\models\Assignment;
 use kartik\select2\Select2;
 use yii\bootstrap\Alert;
 use yii\helpers\Html;

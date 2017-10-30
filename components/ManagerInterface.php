@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\components;
+namespace coreb2c\auth\components;
 
 use yii\rbac\ManagerInterface as BaseManagerInterface;
 

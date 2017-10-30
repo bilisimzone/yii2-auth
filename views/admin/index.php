@@ -26,7 +26,7 @@ $this->title = Yii::t('user', 'Manage users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
+<?= $this->render('/_alert', ['module' => Yii::$app->getModule('auth')]) ?>
 
 <?= $this->render('/admin/_menu') ?>
 
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             },
             'format' => 'raw',
-            'visible' => Yii::$app->getModule('user')->enableConfirmation,
+            'visible' => Yii::$app->getModule('auth')->enableConfirmation,
         ],
         [
             'header' => Yii::t('user', 'Block status'),
@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
                 'switch' => function ($url, $model) {
-                    if($model->id != Yii::$app->user->id && Yii::$app->getModule('user')->enableImpersonateUser) {
+                    if($model->id != Yii::$app->user->id && Yii::$app->getModule('auth')->enableImpersonateUser) {
                         return Html::a('<span class="glyphicon glyphicon-user"></span>', ['/user/admin/switch', 'id' => $model->id], [
                             'title' => Yii::t('user', 'Become this user'),
                             'data-confirm' => Yii::t('user', 'Are you sure you want to switch to this user for the rest of this Session?'),

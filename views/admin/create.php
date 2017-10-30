@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user'),]) ?>
+<?= $this->render('/_alert', ['module' => Yii::$app->getModule('auth'),]) ?>
 
 <?= $this->render('_menu') ?>
 

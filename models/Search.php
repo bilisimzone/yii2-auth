@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\models;
+namespace coreb2c\auth\models;
 
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
@@ -39,7 +39,7 @@ class Search extends Model
     public $rule_name;
     
     /**
-     * @var \coreb2c\rbac\components\DbManager
+     * @var \coreb2c\auth\components\DbManager
      */
     protected $manager;
     

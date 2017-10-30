@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\rbac\controllers;
+namespace coreb2c\auth\controllers;
 
-use coreb2c\rbac\components\DbManager;
-use coreb2c\rbac\models\Rule;
-use coreb2c\rbac\models\RuleSearch;
+use coreb2c\auth\components\DbManager;
+use coreb2c\auth\models\Rule;
+use coreb2c\auth\models\RuleSearch;
 use yii\di\Instance;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

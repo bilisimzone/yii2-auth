@@ -10,7 +10,7 @@
  */
 
 /**
- * @var $model \coreb2c\rbac\models\Rule
+ * @var $model \coreb2c\auth\models\Rule
  * @var $this  \yii\web\View
  */
 
