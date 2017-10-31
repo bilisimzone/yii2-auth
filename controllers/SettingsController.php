@@ -150,7 +150,6 @@ class SettingsController extends Controller
      */
     public function actionProfile()
     {
-        exit;
         $model = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
 
         if ($model == null) {

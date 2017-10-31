@@ -25,7 +25,7 @@ class BackendFilter extends ActionFilter {
     /**
      * @var array
      */
-    public $controllers = ['profile', 'recovery', 'registration', 'settings'];
+    public $controllers = ['registration'];
 
     /**
      * @param \yii\base\Action $action
