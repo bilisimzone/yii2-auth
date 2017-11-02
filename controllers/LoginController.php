@@ -77,7 +77,7 @@ class LoginController extends Controller
     /** @var Finder */
     protected $finder;
 
-    public $defaultRoute = 'login';
+    public $defaultAction = 'login';
     /**
      * @param string $id
      * @param Module $module

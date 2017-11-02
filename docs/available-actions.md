@@ -7,8 +7,8 @@ helper `\yii\helpers\Url::to()`.
 - **/auth/registration/register** Displays registration form
 - **/auth/registration/resend**   Displays resend form
 - **/auth/registration/confirm**  Confirms a user (requires *id* and *token* query params)
-- **/auth/security/login**        Displays login form
-- **/auth/security/logout**       Logs the user out (available only via POST method)
+- **/auth/login/login**        Displays login form
+- **/auth/logout/logout**       Logs the user out (available only via POST method)
 - **/auth/recovery/request**      Displays recovery request form
 - **/auth/recovery/reset**        Displays password reset form (requires *id* and *token* query params)
 - **/auth/settings/profile**      Displays profile settings form

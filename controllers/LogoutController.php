@@ -53,6 +53,7 @@ class LogoutController extends Controller
     /** @var Finder */
     protected $finder;
 
+    public $defaultAction = 'logout';
     /**
      * @param string $id
      * @param Module $module
