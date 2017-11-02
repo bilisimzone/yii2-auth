@@ -31,6 +31,7 @@ class m140209_132017_init extends Migration {
             'updated_at' => $this->integer()->notNull(),
             'flags' => $this->integer()->notNull()->defaultValue(0),
             'last_login_at' => $this->integer(),
+            'group' => $this->integer()->notNull()->defaultValue(1),
                 ], $this->tableOptions);
 
         $this->createIndex('{{%user_unique_username}}', '{{%user}}', 'username', true);

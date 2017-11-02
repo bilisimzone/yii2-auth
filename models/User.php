@@ -45,6 +45,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $updated_at
  * @property integer $last_login
  * @property integer $flags
+ * @property integer $category
  *
  * Defined relations:
  * @property Account[] $accounts
@@ -195,6 +196,7 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at'        => \Yii::t('auth', 'Registration time'),
             'last_login_at'     => \Yii::t('auth', 'Last login'),
             'confirmed_at'      => \Yii::t('auth', 'Confirmation time'),
+            'category'      => \Yii::t('auth', 'Category'),
         ];
     }
 
@@ -312,7 +314,7 @@ class User extends ActiveRecord implements IdentityInterface
         try {
             $this->confirmed_at = $this->module->enableConfirmation ? null : time();
             $this->password     = $this->module->enableGeneratingPassword ? Password::generate(8) : $this->password;
-
+            $this->category     = $this->module->userCategory;
             $this->trigger(self::BEFORE_REGISTER);
 
             if (!$this->save()) {

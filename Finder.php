@@ -22,8 +22,8 @@ use yii\db\ActiveQuery;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class Finder extends Object
-{
+class Finder extends Object {
+
     /** @var ActiveQuery */
     protected $userQuery;
 
@@ -39,56 +39,48 @@ class Finder extends Object
     /**
      * @return ActiveQuery
      */
-    public function getUserQuery()
-    {
+    public function getUserQuery() {
         return $this->userQuery;
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getTokenQuery()
-    {
+    public function getTokenQuery() {
         return $this->tokenQuery;
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getAccountQuery()
-    {
+    public function getAccountQuery() {
         return $this->accountQuery;
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getProfileQuery()
-    {
+    public function getProfileQuery() {
         return $this->profileQuery;
     }
 
     /** @param ActiveQuery $accountQuery */
-    public function setAccountQuery(ActiveQuery $accountQuery)
-    {
+    public function setAccountQuery(ActiveQuery $accountQuery) {
         $this->accountQuery = $accountQuery;
     }
 
     /** @param ActiveQuery $userQuery */
-    public function setUserQuery(ActiveQuery $userQuery)
-    {
+    public function setUserQuery(ActiveQuery $userQuery) {
         $this->userQuery = $userQuery;
     }
 
     /** @param ActiveQuery $tokenQuery */
-    public function setTokenQuery(ActiveQuery $tokenQuery)
-    {
+    public function setTokenQuery(ActiveQuery $tokenQuery) {
         $this->tokenQuery = $tokenQuery;
     }
 
     /** @param ActiveQuery $profileQuery */
-    public function setProfileQuery(ActiveQuery $profileQuery)
-    {
+    public function setProfileQuery(ActiveQuery $profileQuery) {
         $this->profileQuery = $profileQuery;
     }
 
@@ -99,8 +91,7 @@ class Finder extends Object
      *
      * @return models\User
      */
-    public function findUserById($id)
-    {
+    public function findUserById($id) {
         return $this->findUser(['id' => $id])->one();
     }
 
@@ -111,9 +102,12 @@ class Finder extends Object
      *
      * @return models\User
      */
-    public function findUserByUsername($username)
-    {
-        return $this->findUser(['username' => $username])->one();
+    public function findUserByUsername($username, $category = null) {
+        if ($category == null) {
+            return $this->findUser(['username' => $username])->one();
+        } else {
+            return $this->findUser(['username' => $username, 'category'=>$category])->one();
+        }
     }
 
     /**
@@ -123,9 +117,12 @@ class Finder extends Object
      *
      * @return models\User
      */
-    public function findUserByEmail($email)
-    {
-        return $this->findUser(['email' => $email])->one();
+    public function findUserByEmail($email, $category = null) {
+        if ($category == null) {
+            return $this->findUser(['email' => $email])->one();
+        } else {
+            return $this->findUser(['email' => $email, 'category'=>$category])->one();
+        }
     }
 
     /**
@@ -135,13 +132,12 @@ class Finder extends Object
      *
      * @return models\User
      */
-    public function findUserByUsernameOrEmail($usernameOrEmail)
-    {
+    public function findUserByUsernameOrEmail($usernameOrEmail, $category = null) {
         if (filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL)) {
-            return $this->findUserByEmail($usernameOrEmail);
+            return $this->findUserByEmail($usernameOrEmail, $category);
         }
 
-        return $this->findUserByUsername($usernameOrEmail);
+        return $this->findUserByUsername($usernameOrEmail, $category);
     }
 
     /**
@@ -151,16 +147,14 @@ class Finder extends Object
      *
      * @return \yii\db\ActiveQuery
      */
-    public function findUser($condition)
-    {
+    public function findUser($condition) {
         return $this->userQuery->where($condition);
     }
 
     /**
      * @return AccountQuery
      */
-    public function findAccount()
-    {
+    public function findAccount() {
         return $this->accountQuery;
     }
 
@@ -171,8 +165,7 @@ class Finder extends Object
      *
      * @return models\Account|null
      */
-    public function findAccountById($id)
-    {
+    public function findAccountById($id) {
         return $this->accountQuery->where(['id' => $id])->one();
     }
 
@@ -183,8 +176,7 @@ class Finder extends Object
      *
      * @return ActiveQuery
      */
-    public function findToken($condition)
-    {
+    public function findToken($condition) {
         return $this->tokenQuery->where($condition);
     }
 
@@ -197,13 +189,12 @@ class Finder extends Object
      *
      * @return Token
      */
-    public function findTokenByParams($userId, $code, $type)
-    {
+    public function findTokenByParams($userId, $code, $type) {
         return $this->findToken([
-            'user_id' => $userId,
-            'code'    => $code,
-            'type'    => $type,
-        ])->one();
+                    'user_id' => $userId,
+                    'code' => $code,
+                    'type' => $type,
+                ])->one();
     }
 
     /**
@@ -213,8 +204,7 @@ class Finder extends Object
      *
      * @return null|models\Profile
      */
-    public function findProfileById($id)
-    {
+    public function findProfileById($id) {
         return $this->findProfile(['user_id' => $id])->one();
     }
 
@@ -225,8 +215,8 @@ class Finder extends Object
      *
      * @return \yii\db\ActiveQuery
      */
-    public function findProfile($condition)
-    {
+    public function findProfile($condition) {
         return $this->profileQuery->where($condition);
     }
+
 }

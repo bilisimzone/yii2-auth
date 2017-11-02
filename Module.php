@@ -68,6 +68,9 @@ class Module extends BaseModule {
     /** @var int Email changing strategy. */
     public $emailChangeStrategy = self::STRATEGY_DEFAULT;
     
+    /** @var int User category to sign in. Default is 0 for not to check user category. Can be set differently for each application layer. */
+    public $userCategory = 0;
+    
     /** @var int The time you want the user will be remembered without asking for credentials. */
     public $rememberFor = 1209600; // two weeks
 
@@ -84,7 +87,7 @@ class Module extends BaseModule {
     public $admins = [];
 
     /** @var string The Administrator permission name. */
-    public $adminPermission;
+    public $adminPermission = 'admin';
 
     /** @var array Mailer configuration */
     public $mailer = [];
