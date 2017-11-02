@@ -1,6 +1,6 @@
 # yii2-auth
 This project is merged version of [dektrium/yii2-user](https://github.com/dektrium/yii2-user) and [dektrium/yii2-rbac](https://github.com/dektrium/yii2-rbac).
-It is intented to be used specificly on our projects.
+It is intended to be used with **Yii2 Advanced Project Template**.
 
 ## Updates and changes
 With this project followings are changed and updated:

@@ -18,6 +18,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    ''=>'',
+    ''=>'',
+    ''=>'',
+    ''=>'',
+    'Category'=>'Kategori',
     'Assignments have been updated' => 'Atamalar güncellendi',
     'Auth item with such name already exists' => 'Benzer isimde yetki öğesi zaten var',
     'Children' => 'Çocuk',

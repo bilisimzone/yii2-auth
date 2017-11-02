@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Coreb2c project.
  *
@@ -17,7 +16,6 @@ use yii\helpers\Html;
  * @var yii\web\View $this
  * @var coreb2c\auth\models\User $user
  */
-
 $this->title = Yii::t('auth', 'Create a user account');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('auth', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,22 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-body">
-                <?= Nav::widget([
+                <?=
+                Nav::widget([
                     'options' => [
                         'class' => 'nav-pills nav-stacked',
                     ],
                     'items' => [
                         ['label' => Yii::t('auth', 'Account details'), 'url' => ['/auth/admin/create']],
                         ['label' => Yii::t('auth', 'Profile details'), 'options' => [
-                            'class' => 'disabled',
-                            'onclick' => 'return false;',
-                        ]],
+                                'class' => 'disabled',
+                                'onclick' => 'return false;',
+                            ]],
                         ['label' => Yii::t('auth', 'Information'), 'options' => [
-                            'class' => 'disabled',
-                            'onclick' => 'return false;',
-                        ]],
+                                'class' => 'disabled',
+                                'onclick' => 'return false;',
+                            ]],
                     ],
-                ]) ?>
+                ])
+                ?>
             </div>
         </div>
     </div>
@@ -57,16 +57,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Yii::t('auth', 'Credentials will be sent to the user by email') ?>.
                     <?= Yii::t('auth', 'A password will be generated automatically if not provided') ?>.
                 </div>
-                <?php $form = ActiveForm::begin([
-                    'layout' => 'horizontal',
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                    'fieldConfig' => [
-                        'horizontalCssClasses' => [
-                            'wrapper' => 'col-sm-9',
-                        ],
-                    ],
-                ]); ?>
+                <?php
+                $form = ActiveForm::begin([
+                            'layout' => 'horizontal',
+                            'enableAjaxValidation' => true,
+                            'enableClientValidation' => false,
+                            'fieldConfig' => [
+                                'horizontalCssClasses' => [
+                                    'wrapper' => 'col-sm-9',
+                                ],
+                            ],
+                ]);
+                ?>
 
                 <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
 

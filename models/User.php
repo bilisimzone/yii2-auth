@@ -120,7 +120,8 @@ class User extends ActiveRecord implements IdentityInterface
      * @return bool Whether the user is an admin or not.
      */
     public function getIsAdmin()
-    {
+    {   
+//        return true; 
         return
             (\Yii::$app->getAuthManager() && $this->module->adminPermission ?
                 \Yii::$app->user->can($this->module->adminPermission) : false)
@@ -215,8 +216,8 @@ class User extends ActiveRecord implements IdentityInterface
         return ArrayHelper::merge($scenarios, [
             'register' => ['username', 'email', 'password'],
             'connect'  => ['username', 'email'],
-            'create'   => ['username', 'email', 'password'],
-            'update'   => ['username', 'email', 'password'],
+            'create'   => ['username', 'email', 'password', 'category'],
+            'update'   => ['username', 'email', 'password', 'category'],
             'settings' => ['username', 'email', 'password'],
         ]);
     }
@@ -248,7 +249,9 @@ class User extends ActiveRecord implements IdentityInterface
             'emailTrim'     => ['email', 'trim'],
 
             // password rules
-            'passwordRequired' => ['password', 'required', 'on' => ['register']],
+            'passwordRequired' => ['password', 'required', 'on' => ['register', 'create']],
+            'categoryRequired' => ['category', 'required', 'on' => ['create', 'update']],
+            'categoryType' => ['category', 'integer'],
             'passwordLength'   => ['password', 'string', 'min' => 6, 'max' => 72, 'on' => ['register', 'create']],
         ];
     }
