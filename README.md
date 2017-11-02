@@ -2,6 +2,11 @@
 This project is merged version of [dektrium/yii2-user](https://github.com/dektrium/yii2-user) and [dektrium/yii2-rbac](https://github.com/dektrium/yii2-rbac).
 It is intented to be used specificly on our projects.
 
+## Updates and changes
+With this project followings are changed and updated:
+ - User logins are separated by adding category field. So, for each application layers different user categories are enabled to login.
+ - Role Based Access Control (rbac) can be enabled or disable by setting enableRbac property of Module. The default value is 'true'.
+
 ## Documentation
 
 [Read the Documentation](docs/README.md)
