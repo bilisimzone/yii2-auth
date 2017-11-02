@@ -1,12 +1,11 @@
 # yii2-auth
-
-This project is complete copy of [dektrium/yii2-auth](https://github.com/dektrium/yii2-auth) and intented to be used specificly on our projects.
+This project is merged version of [dektrium/yii2-user](https://github.com/dektrium/yii2-user) and [dektrium/yii2-rbac](https://github.com/dektrium/yii2-rbac).
+It is intented to be used specificly on our projects.
 
 ## Documentation
 
-[Read the Documentation for master](docs/README.md)
+[Read the Documentation](docs/README.md)
 
-[Read the Documentation for v0.9.12](https://github.com/coreb2c/yii2-auth/blob/0.9.12/docs/README.md)
 
 ## Installation
 
