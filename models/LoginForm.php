@@ -25,8 +25,8 @@ use yii\base\Model;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class LoginForm extends Model
-{
+class LoginForm extends Model {
+
     use ModuleTrait;
 
     /** @var string User's email or username */
@@ -48,37 +48,33 @@ class LoginForm extends Model
      * @param Finder $finder
      * @param array  $config
      */
-    public function __construct(Finder $finder, $config = [])
-    {
+    public function __construct(Finder $finder, $config = []) {
         $this->finder = $finder;
         parent::__construct($config);
     }
-    
+
     /**
      * Gets all users to generate the dropdown list when in debug mode.
      *
      * @return string
      */
-    public static function loginList()
-    {
+    public static function loginList() {
         return ArrayHelper::map(User::find()->where(['blocked_at' => null])->all(), 'username', function ($user) {
-            return sprintf('%s (%s)', Html::encode($user->username), Html::encode($user->email));
-        });
+                    return sprintf('%s (%s)', Html::encode($user->username), Html::encode($user->email));
+                });
     }
 
     /** @inheritdoc */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'login'      => Yii::t('auth', 'Login'),
-            'password'   => Yii::t('auth', 'Password'),
+            'login' => Yii::t('auth', 'Login'),
+            'password' => Yii::t('auth', 'Password'),
             'rememberMe' => Yii::t('auth', 'Remember me next time'),
         ];
     }
 
     /** @inheritdoc */
-    public function rules()
-    {
+    public function rules() {
         $rules = [
             'requiredFields' => [['login'], 'required'],
             'loginTrim' => ['login', 'trim'],
@@ -86,8 +82,7 @@ class LoginForm extends Model
                 'login',
                 function ($attribute) {
                     if ($this->user !== null) {
-                        $confirmationRequired = $this->module->enableConfirmation
-                            && !$this->module->enableUnconfirmedLogin;
+                        $confirmationRequired = $this->module->enableConfirmation && !$this->module->enableUnconfirmedLogin;
                         if ($confirmationRequired && !$this->user->getIsConfirmed()) {
                             $this->addError($attribute, Yii::t('auth', 'You need to confirm your email address'));
                         }
@@ -123,10 +118,9 @@ class LoginForm extends Model
      *
      * @return void
      */
-    public function validatePassword($attribute, $params)
-    {
-      if ($this->user === null || !Password::validate($this->password, $this->user->password_hash))
-        $this->addError($attribute, Yii::t('auth', 'Invalid login or password'));
+    public function validatePassword($attribute, $params) {
+        if ($this->user === null || !Password::validate($this->password, $this->user->password_hash))
+            $this->addError($attribute, Yii::t('auth', 'Invalid login or password'));
     }
 
     /**
@@ -134,8 +128,7 @@ class LoginForm extends Model
      *
      * @return bool whether the user is logged in successfully
      */
-    public function login()
-    {
+    public function login() {
         if ($this->validate()) {
             $this->user->updateAttributes(['last_login_at' => time()]);
             return Yii::$app->getUser()->login($this->user, $this->rememberMe ? $this->module->rememberFor : 0);
@@ -144,22 +137,25 @@ class LoginForm extends Model
         return false;
     }
 
-
     /** @inheritdoc */
-    public function formName()
-    {
+    public function formName() {
         return 'login-form';
     }
 
     /** @inheritdoc */
-    public function beforeValidate()
-    {
+    public function beforeValidate() {
         if (parent::beforeValidate()) {
-            $this->user = $this->finder->findUserByUsernameOrEmail(trim($this->login), $this->module->userCategory);
-
+            if ($this->module->enableLoginWithUsernameOrEmail === true) {
+                $this->user = $this->finder->findUserByUsernameOrEmail(trim($this->login), $this->module->userCategory);
+            } elseif ($this->module->enableLoginWithEmail === true) {
+                $this->user = $this->finder->findUserByEmail(trim($this->login), $this->module->userCategory);
+            } else {
+                $this->user = $this->finder->findUserByUsername(trim($this->login), $this->module->userCategory);
+            }
             return true;
         } else {
             return false;
         }
     }
+
 }

@@ -61,6 +61,15 @@ class Module extends BaseModule {
 
     /** @var bool Enable the 'impersonate as another user' function */
     public $enableImpersonateUser = true;
+    
+    /** @var bool Enable login with email or username. This will be checked first */
+    public $enableLoginWithUsernameOrEmail = true;
+    
+    /** @var bool Enable login with email. This will be checked secondly */
+    public $enableLoginWithEmail = true;
+    
+    /** @var bool Enable login with username. This will be checked thirdly */
+    public $enableLoginWithUsername = true;
 
     /** @var bool Whether role base access control (rbac) enabled. */
     public $enableRbac = true;
