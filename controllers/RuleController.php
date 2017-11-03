@@ -32,7 +32,10 @@ class RuleController extends Controller
      * @var string|DbManager The auth manager component ID.
      */
     public $authManager = 'authManager';
-
+    
+    public function __construct($id, $module, $config = array()) {
+        parent::__construct($id, $module, $config);
+    }
     /**
      * This method will set [[authManager]] to be the 'authManager' application component, if it is `null`.
      */

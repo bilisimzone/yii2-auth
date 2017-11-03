@@ -18,8 +18,8 @@ use yii\bootstrap\Nav;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class Menu extends Nav
-{
+class Menu extends Nav {
+
     /**
      * @inheritdoc
      */
@@ -30,53 +30,58 @@ class Menu extends Nav
     /**
      * @inheritdoc
      */
-    public function init()
-    {
+    public function init() {
         parent::init();
 
-        $userModuleClass       = 'coreb2c\auth\Module';
-        $isUserModuleInstalled = \Yii::$app->getModule('auth') instanceof $userModuleClass;
+        $userModuleClass = 'coreb2c\auth\Module';
+        $module = \Yii::$app->getModule('auth');
+        $isRbacEnabled = $module->enableRbac === true;
 
         $this->items = [
             [
-                'label'   => \Yii::t('auth', 'Users'),
-                'url'     => ['/auth/admin/index'],
-                'visible' => $isUserModuleInstalled,
+                'label' => \Yii::t('auth', 'Users'),
+                'url' => ['/auth/admin/index'],
             ],
             [
                 'label' => \Yii::t('auth', 'Roles'),
-                'url'   => ['/auth/role/index'],
+                'url' => ['/auth/role/index'],
+                'visible' => $isRbacEnabled,
             ],
             [
                 'label' => \Yii::t('auth', 'Permissions'),
-                'url'   => ['/auth/permission/index'],
+                'url' => ['/auth/permission/index'],
+                'visible' => $isRbacEnabled,
             ],
             [
                 'label' => \Yii::t('auth', 'Rules'),
-                'url'   => ['/auth/rule/index'],
+                'url' => ['/auth/rule/index'],
+                'visible' => $isRbacEnabled,
             ],
             [
                 'label' => \Yii::t('auth', 'Create'),
                 'items' => [
                     [
-                        'label'   =>\ Yii::t('auth', 'New user'),
-                        'url'     => ['/auth/admin/create'],
-                        'visible' => $isUserModuleInstalled,
+                        'label' => \ Yii::t('auth', 'New user'),
+                        'url' => ['/auth/admin/create'],
                     ],
                     [
                         'label' => \Yii::t('auth', 'New role'),
-                        'url'   => ['/auth/role/create']
+                        'url' => ['/auth/role/create'],
+                        'visible' => $isRbacEnabled,
                     ],
                     [
                         'label' => \Yii::t('auth', 'New permission'),
-                        'url'   => ['/auth/permission/create']
+                        'url' => ['/auth/permission/create'],
+                        'visible' => $isRbacEnabled,
                     ],
                     [
                         'label' => \Yii::t('auth', 'New rule'),
-                        'url'   => ['/auth/rule/create']
+                        'url' => ['/auth/rule/create'],
+                        'visible' => $isRbacEnabled,
                     ]
                 ]
             ],
         ];
     }
+
 }
