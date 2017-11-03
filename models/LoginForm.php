@@ -120,7 +120,7 @@ class LoginForm extends Model {
                 'passwordValidate' => [
                     'password',
                     function ($attribute) {
-                        if ($this->user!==null && !Password::validate($this->password, $this->user->password_hash)) {
+                        if ($this->user !== null && !Password::validate($this->password, $this->user->password_hash)) {
                             $this->addError($attribute, Yii::t('auth', 'Invalid password'));
                         }
                     }
@@ -138,8 +138,9 @@ class LoginForm extends Model {
      * @return void
      */
     public function validatePassword($attribute, $params) {
-        if ($this->user === null || !Password::validate($this->password, $this->user->password_hash))
-            $this->addError($attribute, Yii::t('auth', 'Invalid login or password'));
+        if ($this->user !== null && !Password::validate($this->password, $this->user->password_hash)) {
+            $this->addError($attribute, Yii::t('auth', 'Invalid password'));
+        }
     }
 
     /**
