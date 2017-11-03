@@ -68,6 +68,7 @@ GridView::widget([
                         }
                     },
                         ],
+                            'category',
                         [
                             'header' => Yii::t('auth', 'Confirmation'),
                             'value' => function ($model) {
