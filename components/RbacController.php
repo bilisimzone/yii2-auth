@@ -1,18 +1,21 @@
 <?php
 
 namespace coreb2c\auth\components;
-use yii;
+
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
+
 class RbacController extends Controller {
+
     public function init() {
         parent::init();
         $module = \Yii::$app->getModule('auth');
-        if($module->enableRbac!==true){
-            throw new ForbiddenHttpException(Yii::t('auth', 'Role Base Access Control (RBAC) is not enabled'));
+        if ($module->enableRbac !== true) {
+            throw new ForbiddenHttpException(\Yii::t('auth', 'Role Base Access Control (RBAC) is not enabled'));
         }
     }
+
     /** @inheritdoc */
     public function behaviors() {
         return [

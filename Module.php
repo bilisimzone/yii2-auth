@@ -72,7 +72,7 @@ class Module extends BaseModule {
     public $enableLoginWithUsername = true;
 
     /** @var bool Whether role base access control (rbac) enabled. */
-    public $enableRbac = false;
+    public $enableRbac = true;
     
     /** @var int Email changing strategy. */
     public $emailChangeStrategy = self::STRATEGY_DEFAULT;
