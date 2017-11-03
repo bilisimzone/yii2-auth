@@ -29,10 +29,11 @@ use yii\web\NotFoundHttpException;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class RegistrationController extends Controller
-{
+class RegistrationController extends Controller {
+
     use AjaxValidationTrait;
-    use EventTrait;
+
+use EventTrait;
 
     /**
      * Event is triggered after creating RegistrationForm class.
@@ -91,15 +92,13 @@ class RegistrationController extends Controller
      * @param Finder           $finder
      * @param array            $config
      */
-    public function __construct($id, $module, Finder $finder, $config = [])
-    {
+    public function __construct($id, $module, Finder $finder, $config = []) {
         $this->finder = $finder;
         parent::__construct($id, $module, $config);
     }
 
     /** @inheritdoc */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -119,8 +118,7 @@ class RegistrationController extends Controller
      * @return string
      * @throws \yii\web\HttpException
      */
-    public function actionRegister()
-    {
+    public function actionRegister() {
         if (!$this->module->enableRegistration) {
             throw new NotFoundHttpException();
         }
@@ -137,14 +135,14 @@ class RegistrationController extends Controller
             $this->trigger(self::EVENT_AFTER_REGISTER, $event);
 
             return $this->render('/message', [
-                'title'  => \Yii::t('auth', 'Your account has been created'),
-                'module' => $this->module,
+                        'title' => \Yii::t('auth', 'Your account has been created'),
+                        'module' => $this->module,
             ]);
         }
 
         return $this->render('register', [
-            'model'  => $model,
-            'module' => $this->module,
+                    'model' => $model,
+                    'module' => $this->module,
         ]);
     }
 
@@ -156,8 +154,7 @@ class RegistrationController extends Controller
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionConnect($code)
-    {
+    public function actionConnect($code) {
         $account = $this->finder->findAccount()->byCode($code)->one();
 
         if ($account === null || $account->getIsConnected()) {
@@ -166,10 +163,10 @@ class RegistrationController extends Controller
 
         /** @var User $user */
         $user = \Yii::createObject([
-            'class'    => User::className(),
-            'scenario' => 'connect',
-            'username' => $account->username,
-            'email'    => $account->email,
+                    'class' => User::className(),
+                    'scenario' => 'connect',
+                    'username' => $account->username,
+                    'email' => $account->email,
         ]);
 
         $event = $this->getConnectEvent($account, $user);
@@ -184,8 +181,8 @@ class RegistrationController extends Controller
         }
 
         return $this->render('connect', [
-            'model'   => $user,
-            'account' => $account,
+                    'model' => $user,
+                    'account' => $account,
         ]);
     }
 
@@ -199,8 +196,7 @@ class RegistrationController extends Controller
      * @return string
      * @throws \yii\web\HttpException
      */
-    public function actionConfirm($id, $code)
-    {
+    public function actionConfirm($id, $code) {
         $user = $this->finder->findUserById($id);
 
         if ($user === null || $this->module->enableConfirmation == false) {
@@ -216,8 +212,8 @@ class RegistrationController extends Controller
         $this->trigger(self::EVENT_AFTER_CONFIRM, $event);
 
         return $this->render('/message', [
-            'title'  => \Yii::t('auth', 'Account confirmation'),
-            'module' => $this->module,
+                    'title' => \Yii::t('auth', 'Account confirmation'),
+                    'module' => $this->module,
         ]);
     }
 
@@ -227,8 +223,7 @@ class RegistrationController extends Controller
      * @return string
      * @throws \yii\web\HttpException
      */
-    public function actionResend()
-    {
+    public function actionResend() {
         if ($this->module->enableConfirmation == false) {
             throw new NotFoundHttpException();
         }
@@ -241,17 +236,30 @@ class RegistrationController extends Controller
 
         $this->performAjaxValidation($model);
 
-        if ($model->load(\Yii::$app->request->post()) && $model->resend()) {
-            $this->trigger(self::EVENT_AFTER_RESEND, $event);
-
-            return $this->render('/message', [
-                'title'  => \Yii::t('auth', 'A new confirmation link has been sent'),
-                'module' => $this->module,
-            ]);
+        if ($model->load(\Yii::$app->request->post())) {
+            if (!$model->user->isConfirmed) {
+                $model->resend();
+                $this->trigger(self::EVENT_AFTER_RESEND, $event);
+                return $this->render('/message', [
+                            'title' => \Yii::t('auth', 'A new confirmation link has been sent'),
+                            'module' => $this->module,
+                ]);
+            } else {
+                \Yii::$app->session->setFlash(
+                        'danger', \Yii::t(
+                                'auth', 'You account is already confirmed. Please try resetting your password'
+                        )
+                );
+                return $this->render('/message', [
+                            'title' => \Yii::t('auth', 'You account is already confirmed. Please try resetting your password'),
+                            'module' => $this->module,
+                ]);
+            }
         }
 
         return $this->render('resend', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
+
 }

@@ -21,7 +21,7 @@ return [
     ''=>'',
     ''=>'',
     ''=>'',
-    ''=>'',
+    'You account is already confirmed. Please try resetting your password'=>'Hesabınız zaten onaylanmış. Lütfen şifrenizi sıfırlama işlemini deneyiniz.',
     'Category'=>'Kategori',
     'Assignments have been updated' => 'Atamalar güncellendi',
     'Auth item with such name already exists' => 'Benzer isimde yetki öğesi zaten var',

@@ -198,7 +198,7 @@ class SettingsForm extends Model
         Yii::$app->session->setFlash(
             'info',
             Yii::t(
-                'user',
+                'auth',
                 'We have sent confirmation links to both old and new email addresses. You must click both links to complete your request'
             )
         );

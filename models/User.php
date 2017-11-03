@@ -73,6 +73,7 @@ class User extends ActiveRecord implements IdentityInterface {
 
     /** @var string Plain password. Used for model validation. */
     public $password;
+    public $emailAccountDetails;
 
     /** @var Profile|null */
     private $_profile;
@@ -205,8 +206,8 @@ class User extends ActiveRecord implements IdentityInterface {
         return ArrayHelper::merge($scenarios, [
                     'register' => ['username', 'email', 'password'],
                     'connect' => ['username', 'email'],
-                    'create' => ['username', 'email', 'password', 'category'],
-                    'update' => ['username', 'email', 'password', 'category'],
+                    'create' => ['username', 'email', 'password', 'category', 'email_details'],
+                    'update' => ['username', 'email', 'password', 'category', 'email_details'],
                     'settings' => ['username', 'email', 'password'],
         ]);
     }
@@ -235,10 +236,12 @@ class User extends ActiveRecord implements IdentityInterface {
             ],
             'emailTrim' => ['email', 'trim'],
             // password rules
-            'passwordRequired' => ['password', 'required', 'on' => ['register', 'create']],
+            'passwordRequired' => ['password', 'required', 'on' => ['register']],
+            'passwordLength' => ['password', 'string', 'min' => 6, 'max' => 72, 'on' => ['register', 'create']],
             'categoryRequired' => ['category', 'required', 'on' => ['create', 'update']],
             'categoryType' => ['category', 'integer'],
-            'passwordLength' => ['password', 'string', 'min' => 6, 'max' => 72, 'on' => ['register', 'create']],
+            'emailDetailsType' => ['emailAccountDetails', 'integer'],
+            'emailDetailsRange' => ['emailAccountDetails', 'in', 'range' => [0, 1]],
         ];
     }
 
@@ -270,8 +273,9 @@ class User extends ActiveRecord implements IdentityInterface {
             }
 
             $this->confirm();
-
-            $this->mailer->sendWelcomeMessage($this, null, true);
+            if ($this->emailAccountDetails) {
+                $this->mailer->sendWelcomeMessage($this, null, true);
+            }
             $this->trigger(self::AFTER_CREATE);
 
             $transaction->commit();
@@ -402,7 +406,7 @@ class User extends ActiveRecord implements IdentityInterface {
                             $this->flags |= self::NEW_EMAIL_CONFIRMED;
                             \Yii::$app->session->setFlash(
                                     'success', \Yii::t(
-                                            'user', 'Awesome, almost there. Now you need to click the confirmation link sent to your old email address'
+                                            'auth', 'Awesome, almost there. Now you need to click the confirmation link sent to your old email address'
                                     )
                             );
                             break;
@@ -410,7 +414,7 @@ class User extends ActiveRecord implements IdentityInterface {
                             $this->flags |= self::OLD_EMAIL_CONFIRMED;
                             \Yii::$app->session->setFlash(
                                     'success', \Yii::t(
-                                            'user', 'Awesome, almost there. Now you need to click the confirmation link sent to your new email address'
+                                            'auth', 'Awesome, almost there. Now you need to click the confirmation link sent to your new email address'
                                     )
                             );
                             break;

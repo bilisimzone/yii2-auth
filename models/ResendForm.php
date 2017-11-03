@@ -21,12 +21,18 @@ use yii\base\Model;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class ResendForm extends Model
-{
+class ResendForm extends Model {
+
     /**
      * @var string
      */
     public $email;
+
+    /**
+     *
+     * @var User|null 
+     */
+    private $_user;
 
     /**
      * @var Mailer
@@ -43,8 +49,7 @@ class ResendForm extends Model
      * @param Finder $finder
      * @param array  $config
      */
-    public function __construct(Mailer $mailer, Finder $finder, $config = [])
-    {
+    public function __construct(Mailer $mailer, Finder $finder, $config = []) {
         $this->mailer = $mailer;
         $this->finder = $finder;
         parent::__construct($config);
@@ -53,8 +58,7 @@ class ResendForm extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'emailRequired' => ['email', 'required'],
             'emailPattern' => ['email', 'email'],
@@ -64,8 +68,7 @@ class ResendForm extends Model
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'email' => \Yii::t('auth', 'Email'),
         ];
@@ -74,8 +77,7 @@ class ResendForm extends Model
     /**
      * @inheritdoc
      */
-    public function formName()
-    {
+    public function formName() {
         return 'resend-form';
     }
 
@@ -84,8 +86,7 @@ class ResendForm extends Model
      *
      * @return bool
      */
-    public function resend()
-    {
+    public function resend() {
         if (!$this->validate()) {
             return false;
         }
@@ -95,22 +96,29 @@ class ResendForm extends Model
         if ($user instanceof User && !$user->isConfirmed) {
             /** @var Token $token */
             $token = \Yii::createObject([
-                'class' => Token::className(),
-                'user_id' => $user->id,
-                'type' => Token::TYPE_CONFIRMATION,
+                        'class' => Token::className(),
+                        'user_id' => $user->id,
+                        'type' => Token::TYPE_CONFIRMATION,
             ]);
             $token->save(false);
             $this->mailer->sendConfirmationMessage($user, $token);
         }
 
         \Yii::$app->session->setFlash(
-            'info',
-            \Yii::t(
-                'user',
-                'A message has been sent to your email address. It contains a confirmation link that you must click to complete registration.'
-            )
+                'info', \Yii::t(
+                        'auth', 'A message has been sent to your email address. It contains a confirmation link that you must click to complete registration.'
+                )
         );
 
         return true;
     }
+
+    public function getUser() {
+        return $this->finder->findUserByEmail($this->email);
+    }
+
+    public function setUser(User $user) {
+        $this->_user = $user;
+    }
+
 }

@@ -116,7 +116,7 @@ class RegistrationForm extends Model
         Yii::$app->session->setFlash(
             'info',
             Yii::t(
-                'user',
+                'auth',
                 'Your account has been created and a message with further instructions has been sent to your email'
             )
         );
