@@ -67,7 +67,7 @@ class LoginForm extends Model {
     /** @inheritdoc */
     public function attributeLabels() {
         return [
-            'login' => Yii::t('auth', 'Login'),
+            'login' => (($this->module->enableLoginWithUsernameOrEmail === true) ? Yii::t('auth', 'Username or Email') : (($this->module->enableLoginWithUsernameOrEmail === false and $this->module->enableLoginWithEmail === true) ? Yii::t('auth', 'Email') : Yii::t('auth', 'Username'))),
             'password' => Yii::t('auth', 'Password'),
             'rememberMe' => Yii::t('auth', 'Remember me next time'),
         ];
@@ -75,9 +75,18 @@ class LoginForm extends Model {
 
     /** @inheritdoc */
     public function rules() {
+        $user = $this->module->modelMap['User'];
         $rules = [
             'requiredFields' => [['login'], 'required'],
             'loginTrim' => ['login', 'trim'],
+            'loginExistance' => [
+                'login',
+                function ($attribute) {
+                    if ($this->user == null) {
+                        $this->addError($attribute, Yii::t('auth', 'Invalid username'));
+                    }
+                }
+            ],
             'confirmationValidate' => [
                 'login',
                 function ($attribute) {
@@ -94,15 +103,25 @@ class LoginForm extends Model {
             ],
             'rememberMe' => ['rememberMe', 'boolean'],
         ];
-
+        if ($this->module->enableLoginWithUsernameOrEmail === false and $this->module->enableLoginWithEmail == true) {
+            $rules = array_merge($rules, [
+                'loginType' => [['login'], 'email']
+            ]);
+        }
+        if ($this->module->enableLoginWithUsernameOrEmail === false and $this->module->enableLoginWithEmail == false and $this->module->enableLoginWithUsername === true) {
+            $rules = array_merge($rules, [
+                'usernameLength' => ['login', 'string', 'min' => 3, 'max' => 255],
+                'usernamePattern' => ['login', 'match', 'pattern' => $user::$usernameRegexp],
+            ]);
+        }
         if (!$this->module->debug) {
             $rules = array_merge($rules, [
                 'requiredFields' => [['login', 'password'], 'required'],
                 'passwordValidate' => [
                     'password',
                     function ($attribute) {
-                        if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
-                            $this->addError($attribute, Yii::t('auth', 'Invalid login or password'));
+                        if ($this->user!==null && !Password::validate($this->password, $this->user->password_hash)) {
+                            $this->addError($attribute, Yii::t('auth', 'Invalid password'));
                         }
                     }
                 ]

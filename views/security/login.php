@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Coreb2c project.
  *
@@ -19,7 +18,6 @@ use yii\widgets\ActiveForm;
  * @var coreb2c\auth\models\LoginForm $model
  * @var coreb2c\auth\Module $module
  */
-
 $this->title = Yii::t('auth', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -33,17 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
             </div>
             <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id' => 'login-form',
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                    'validateOnBlur' => false,
-                    'validateOnType' => false,
-                    'validateOnChange' => false,
-                ]) ?>
+                <?php
+                $form = ActiveForm::begin([
+                            'id' => 'login-form',
+                            'enableAjaxValidation' => true,
+                            'enableClientValidation' => false,
+                            'validateOnBlur' => false,
+                            'validateOnType' => false,
+                            'validateOnChange' => false,
+                        ])
+                ?>
 
                 <?php if ($module->debug): ?>
-                    <?= $form->field($model, 'login', [
+                    <?=
+                    $form->field($model, 'login', [
                         'inputOptions' => [
                             'autofocus' => 'autofocus',
                             'class' => 'form-control',
@@ -52,9 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php else: ?>
 
-                    <?= $form->field($model, 'login',
-                        ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control', 'tabindex' => '1']]
-                    );
+                    <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control', 'tabindex' => '1']])->input('email');
                     ?>
 
                 <?php endif ?>
@@ -64,29 +63,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Yii::t('auth', 'Password is not necessary because the module is in DEBUG mode.'); ?>
                     </div>
                 <?php else: ?>
-                    <?= $form->field(
-                        $model,
-                        'password',
-                        ['inputOptions' => ['class' => 'form-control', 'tabindex' => '2']])
-                        ->passwordInput()
-                        ->label(
-                            Yii::t('auth', 'Password')
-                            . ($module->enablePasswordRecovery ?
-                                ' (' . Html::a(
-                                    Yii::t('auth', 'Forgot password?'),
-                                    ['/auth/recovery/request'],
-                                    ['tabindex' => '5']
-                                )
-                                . ')' : '')
-                        ) ?>
+                    <?=
+                            $form->field(
+                                    $model, 'password', ['inputOptions' => ['class' => 'form-control', 'tabindex' => '2']])
+                            ->passwordInput()
+                            ->label(
+                                    Yii::t('auth', 'Password')
+                                    . ($module->enablePasswordRecovery ?
+                                            ' (' . Html::a(
+                                                    Yii::t('auth', 'Forgot password?'), ['/auth/recovery/request'], ['tabindex' => '5']
+                                            )
+                                            . ')' : '')
+                            )
+                    ?>
                 <?php endif ?>
 
                 <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '3']) ?>
 
-                <?= Html::submitButton(
-                    Yii::t('auth', 'Sign in'),
-                    ['class' => 'btn btn-primary btn-block', 'tabindex' => '4']
-                ) ?>
+                <?=
+                Html::submitButton(
+                        Yii::t('auth', 'Sign in'), ['class' => 'btn btn-primary btn-block', 'tabindex' => '4']
+                )
+                ?>
 
                 <?php ActiveForm::end(); ?>
             </div>
@@ -101,8 +99,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::a(Yii::t('auth', 'Don\'t have an account? Sign up!'), ['/auth/registration/register']) ?>
             </p>
         <?php endif ?>
-        <?= Connect::widget([
+        <?=
+        Connect::widget([
             'baseAuthUrl' => ['/auth/security/auth'],
-        ]) ?>
+        ])
+        ?>
     </div>
 </div>

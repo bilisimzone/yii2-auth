@@ -124,7 +124,7 @@ class LoginController extends Controller
      * @return string|Response
      */
     public function actionLogin()
-    {
+    { 
         if (!\Yii::$app->user->isGuest) {
             $this->goHome();
         }

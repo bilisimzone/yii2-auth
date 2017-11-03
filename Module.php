@@ -63,10 +63,10 @@ class Module extends BaseModule {
     public $enableImpersonateUser = true;
     
     /** @var bool Enable login with email or username. This will be checked first */
-    public $enableLoginWithUsernameOrEmail = true;
+    public $enableLoginWithUsernameOrEmail = false;
     
     /** @var bool Enable login with email. This will be checked secondly */
-    public $enableLoginWithEmail = true;
+    public $enableLoginWithEmail = false;
     
     /** @var bool Enable login with username. This will be checked thirdly */
     public $enableLoginWithUsername = true;
@@ -120,7 +120,7 @@ class Module extends BaseModule {
     /** @var array The rules to be used in URL management. */
     public $urlRules = [
         '<id:\d+>' => 'profile/show',
-        '<action:(login|logout|auth)>' => 'security/<action>',
+        '<action:(auth)>' => 'security/<action>',
         '<action:(register|resend)>' => 'registration/<action>',
         'confirm/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'registration/confirm',
         'forgot' => 'recovery/request',

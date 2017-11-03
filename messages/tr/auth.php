@@ -19,8 +19,9 @@
  */
 return [
     ''=>'',
-    ''=>'',
-    ''=>'',
+    'Invalid username'=>'Geçersiz kullanıcı adı',
+    'Invalid password'=>'Geçersiz şifre',
+    'Username or Email'=>'Kullanıcı Adı veya Eposta',
     'You account is already confirmed. Please try resetting your password'=>'Hesabınız zaten onaylanmış. Lütfen şifrenizi sıfırlama işlemini deneyiniz.',
     'Category'=>'Kategori',
     'Assignments have been updated' => 'Atamalar güncellendi',
