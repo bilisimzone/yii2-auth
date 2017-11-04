@@ -73,7 +73,7 @@ class User extends ActiveRecord implements IdentityInterface {
 
     /** @var string Plain password. Used for model validation. */
     public $password;
-    public $emailAccountDetails;
+    public $emailAccountDetails = 1;
 
     /** @var Profile|null */
     private $_profile;

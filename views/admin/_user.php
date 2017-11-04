@@ -20,5 +20,5 @@
 <?= $form->field($user, 'password')->passwordInput() ?>
 <?= $form->field($user, 'category')->textInput(['maxLength' => 11]) ?>
 <?php if ($user->isNewRecord): ?>
-    <?= $form->field($user, 'emailAccountDetails')->checkBox(); ?>
+    <?= $form->field($user, 'emailAccountDetails')->checkBox(['uncheck' => null]); ?>
 <?php endif; ?>
