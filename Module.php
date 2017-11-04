@@ -63,10 +63,10 @@ class Module extends BaseModule {
     public $enableImpersonateUser = true;
     
     /** @var bool Enable login with email or username. This will be checked first */
-    public $enableLoginWithUsernameOrEmail = false;
+    public $enableLoginWithUsernameOrEmail = true;
     
     /** @var bool Enable login with email. This will be checked secondly */
-    public $enableLoginWithEmail = false;
+    public $enableLoginWithEmail = true;
     
     /** @var bool Enable login with username. This will be checked thirdly */
     public $enableLoginWithUsername = true;
@@ -75,7 +75,7 @@ class Module extends BaseModule {
     public $enableRbac = true;
     
     /** @var int Email changing strategy. */
-    public $emailChangeStrategy = self::STRATEGY_DEFAULT;
+    public $emailChangeStrategy = self::STRATEGY_SECURE;
     
     /** @var int User category to sign in. Default is 0 for not to check user category. Can be set differently for each application layer. */
     public $userCategory = 0;

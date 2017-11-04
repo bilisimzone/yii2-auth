@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Coreb2c project.
  *
@@ -24,11 +23,27 @@ use yii\helpers\Html;
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
     <?= Yii::t('auth', 'Your account on {0} has been created', Yii::$app->name) ?>.
-    <?php if ($showPassword || $module->enableGeneratingPassword): ?>
-        <?= Yii::t('auth', 'We have generated a password for you') ?>: <strong><?= $user->password ?></strong>
-    <?php endif ?>
-
 </p>
+<?php if ($showPassword || $module->enableGeneratingPassword): ?>
+    <p><?= Yii::t('auth', 'Your login credentials are as below') ?>:</p>
+    <hr>
+    <table width="250" style="width: 250px;" >
+        <tbody>
+            <tr>
+                <td style="text-align: left;"><?= Yii::t('auth', 'Email') ?>:</td><th style="text-align: left;"><?= $user->email ?></th>
+            </tr>
+            <?php if ($module->enableLoginWithUsernameOrEmail === true || $module->enableLoginWithUsername === true): ?>
+                <tr>
+                    <td style="text-align: left;"><?= Yii::t('auth', 'Username') ?>:</td><th style="text-align: left;"><?= $user->username ?></th>
+                </tr>
+            <?php endif; ?>
+            <tr>
+                <td style="text-align: left;"><?= Yii::t('auth', 'Password') ?>:</td><th style="text-align: left;"><?= $user->password ?></th>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+<?php endif ?>
 
 <?php if ($token !== null): ?>
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">

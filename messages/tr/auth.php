@@ -19,6 +19,10 @@
  */
 return [
     ''=>'',
+    ''=>'',
+    'We have generated a password for you'=>'Sizin için şifre oluşturduk',
+    'Your login credentials are as below'=>'Giriş bilgileriniz aşağıdaki gibidir',
+    'Email login credentials?'=>'Giriş bilgilerini eposta ile gönder',
     'Invalid username'=>'Geçersiz kullanıcı adı',
     'Invalid password'=>'Geçersiz şifre',
     'Username or Email'=>'Kullanıcı Adı veya Eposta',
@@ -131,7 +135,7 @@ return [
     'A message has been sent to your email address. It contains a password that we generated for you.' => 'Eposta adresinize bir mail gönderildi. Mailde sizin için oluşturduğumuz bir şifre mevcut.',
     'A message has been sent to your email address. It contains your password and a confirmation link that you must click to complete registration.' => 'Eposta adresinize bir mail gönderildi. Mailde bir şifre ve kayıt işlemini tamamlamanız için tıklamanız gereken bir link mevcut.',
     'A new confirmation link has been sent' => 'Yeni bir doğrulama linki gönderildi',
-    'A password will be generated automatically if not provided' => 'Eğer geçersizse yeni şifre otomatik olarak oluşturulacak',
+    'If not provided a password will be generated automatically' => 'Eğer şifre belitilmezse yeni şifre otomatik olarak oluşturulacak',
     'Account' => 'Hesap',
     'Account confirmation' => 'Hesap onayı',
     'Account settings' => 'Hesap Ayarları',

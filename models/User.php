@@ -115,13 +115,13 @@ class User extends ActiveRecord implements IdentityInterface {
      * @return bool Whether the user is an admin or not.
      */
     public function getIsAdmin() {
+        if (in_array($this->username, $this->module->admins)) {
+            return true;
+        }
         if (\Yii::$app->getAuthManager() && $this->module->adminPermission) {
             if (\Yii::$app->getAuthManager()->getAssignment($this->module->adminPermission, $this->id)) {
                 return true;
             }
-        }
-        if (in_array($this->username, $this->module->admins)) {
-            return true;
         }
         return false;
 //        return
@@ -190,6 +190,7 @@ class User extends ActiveRecord implements IdentityInterface {
             'last_login_at' => \Yii::t('auth', 'Last login'),
             'confirmed_at' => \Yii::t('auth', 'Confirmation time'),
             'category' => \Yii::t('auth', 'Category'),
+            'emailAccountDetails' => \Yii::t('auth', 'Email login credentials?'),
         ];
     }
 

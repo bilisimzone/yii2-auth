@@ -19,11 +19,7 @@ use yii\helpers\Html;
     <?= Yii::t('auth', 'Hello') ?>,
 </p>
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    <?= Yii::t(
-        'user',
-        'We have received a request to change the email address for your account on {0}',
-        Yii::$app->name
-    ) ?>.
+    <?= Yii::t('auth', 'We have received a request to change the email address for your account on {0}', Yii::$app->name) ?>.
     <?= Yii::t('auth', 'In order to complete your request, please click the link below') ?>.
 </p>
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">

@@ -82,7 +82,7 @@ class LoginForm extends Model {
             'loginExistance' => [
                 'login',
                 function ($attribute) {
-                    if ($this->user == null) {
+                    if ($this->user === null) {
                         $this->addError($attribute, Yii::t('auth', 'Invalid username'));
                     }
                 }

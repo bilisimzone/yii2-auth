@@ -54,8 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="alert alert-info">
-                    <?= Yii::t('auth', 'Credentials will be sent to the user by email') ?>.
-                    <?= Yii::t('auth', 'A password will be generated automatically if not provided') ?>.
+                    <?= Yii::t('auth', 'If not provided a password will be generated automatically') ?>.
                 </div>
                 <?php
                 $form = ActiveForm::begin([

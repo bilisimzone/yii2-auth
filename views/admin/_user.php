@@ -19,4 +19,6 @@
 <?= $form->field($user, 'username')->textInput(['maxlength' => 255]) ?>
 <?= $form->field($user, 'password')->passwordInput() ?>
 <?= $form->field($user, 'category')->textInput(['maxLength' => 11]) ?>
-<?= $form->field($user, 'emailAccountDetails')->checkBox(); ?>
+<?php if ($user->isNewRecord): ?>
+    <?= $form->field($user, 'emailAccountDetails')->checkBox(); ?>
+<?php endif; ?>
