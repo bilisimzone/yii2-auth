@@ -81,6 +81,12 @@ class User extends ActiveRecord implements IdentityInterface {
     /** @var string Default username regexp */
     public static $usernameRegexp = '/^[-a-zA-Z0-9_\.@]+$/';
 
+    public function afterDelete() {
+        parent::afterDelete();
+        if(\Yii::$app->getAuthManager()){
+            \Yii::$app->getAuthManager()->revokeAll($this->id);
+        }
+    }
     /**
      * @return Finder
      * @throws \yii\base\InvalidConfigException
