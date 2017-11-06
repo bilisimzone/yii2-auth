@@ -166,4 +166,10 @@ class Rule extends Model
         
         return true;
     }
+    public function attributeLabels() {
+        return [
+            'name' => \Yii::t('auth', 'Name'),
+            'class' => \Yii::t('auth', 'Class'),
+        ];
+    }
 }

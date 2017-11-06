@@ -77,8 +77,11 @@ class Module extends BaseModule {
     /** @var int Email changing strategy. */
     public $emailChangeStrategy = self::STRATEGY_SECURE;
     
-    /** @var int User category to sign in. Default is 0 for not to check user category. Can be set differently for each application layer. */
-    public $userCategory = 0;
+    /** @var int User category to sign in. Default is null for not to check user category. Can be set differently for each application layer. */
+    public $userCategory = null;
+    
+    /** @var array User categories to sign in. Indexes are used to validate user category value for each application layer */
+    public $userCategories = [];
     
     /** @var int The time you want the user will be remembered without asking for credentials. */
     public $rememberFor = 1209600; // two weeks
