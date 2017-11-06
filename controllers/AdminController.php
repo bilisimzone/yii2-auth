@@ -225,6 +225,7 @@ class AdminController extends Controller
             'class'    => User::className(),
             'scenario' => 'create',
         ]);
+        $user->loadDefaultValues();
         $event = $this->getUserEvent($user);
 
         $this->performAjaxValidation($user);
