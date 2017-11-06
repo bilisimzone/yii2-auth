@@ -25,9 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?= $this->render('/_alert', ['module' => Yii::$app->getModule('auth')]) ?>
-
-<?= $this->render('/admin/_menu') ?>
-
+<?php $this->beginContent('@coreb2c/auth/views/layout.php') ?>
 <?php Pjax::begin() ?>
 
 <?=
@@ -68,7 +66,7 @@ GridView::widget([
                         }
                     },
                         ],
-                            'category',
+                        'category',
                         [
                             'header' => Yii::t('auth', 'Confirmation'),
                             'value' => function ($model) {
@@ -134,3 +132,4 @@ GridView::widget([
                                         ?>
 
                                         <?php Pjax::end() ?>
+<?php $this->endContent() ?>

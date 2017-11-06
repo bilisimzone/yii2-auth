@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $this->render('/_alert', ['module' => Yii::$app->getModule('auth')]) ?>
 
-<?= $this->render('_menu') ?>
+<?php $this->beginContent('@coreb2c/auth/views/layout.php') ?>
 
 <div class="row">
     <div class="col-md-3">
@@ -102,3 +102,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+<?php $this->endContent() ?>

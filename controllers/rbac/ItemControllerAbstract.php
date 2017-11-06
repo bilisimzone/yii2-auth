@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\auth\controllers;
+namespace coreb2c\auth\controllers\rbac;
 
 use yii\base\InvalidConfigException;
 use yii\base\Model;

@@ -32,7 +32,6 @@ class Menu extends Nav {
      */
     public function init() {
         parent::init();
-
         $userModuleClass = 'coreb2c\auth\Module';
         $module = \Yii::$app->getModule('auth');
         $isRbacEnabled = $module->enableRbac === true;
@@ -44,17 +43,17 @@ class Menu extends Nav {
             ],
             [
                 'label' => \Yii::t('auth', 'Roles'),
-                'url' => ['/auth/role/index'],
+                'url' => ['/auth/rbac/role/index'],
                 'visible' => $isRbacEnabled,
             ],
             [
                 'label' => \Yii::t('auth', 'Permissions'),
-                'url' => ['/auth/permission/index'],
+                'url' => ['/auth/rbac/permission/index'],
                 'visible' => $isRbacEnabled,
             ],
             [
                 'label' => \Yii::t('auth', 'Rules'),
-                'url' => ['/auth/rule/index'],
+                'url' => ['/auth/rbac/rule/index'],
                 'visible' => $isRbacEnabled,
             ],
             [
@@ -66,18 +65,18 @@ class Menu extends Nav {
                     ],
                     [
                         'label' => \Yii::t('auth', 'New role'),
-                        'url' => ['/auth/role/create'],
+                        'url' => ['/auth/rbac/role/create'],
                         'visible' => $isRbacEnabled,
                     ],
                     [
                         'label' => \Yii::t('auth', 'New permission'),
-                        'url' => ['/auth/permission/create'],
+                        'url' => ['/auth/rbac/permission/create'],
                         'visible' => $isRbacEnabled,
                     ],
                     [
                         'label' => \Yii::t('auth', 'New rule'),
-                        'url' => ['/auth/rule/create'],
-                        'visible' => $isRbacEnabled,
+                        'url' => ['/auth/rbac/rule/create'],
+                        'visible' => $isRbacEnabled, 
                     ]
                 ]
             ],

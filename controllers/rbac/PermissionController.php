@@ -9,28 +9,29 @@
  * file that was distributed with this source code.
  */
 
-namespace coreb2c\auth\controllers;
+namespace coreb2c\auth\controllers\rbac;
 
-use yii\auth\Role;
+use yii\auth\Permission;
 use yii\web\NotFoundHttpException;
 use yii\rbac\Item;
 
 /**
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class RoleController extends ItemControllerAbstract
+class PermissionController extends ItemControllerAbstract
 {
     /** @var string */
-    protected $modelClass = 'coreb2c\auth\models\Role';
+    protected $modelClass = 'coreb2c\auth\models\Permission';
     
-    protected $type = Item::TYPE_ROLE;
+    /** @var int */
+    protected $type = Item::TYPE_PERMISSION;
 
     /** @inheritdoc */
     protected function getItem($name)
     {
-        $role = \Yii::$app->authManager->getRole($name);
+        $role = \Yii::$app->authManager->getPermission($name);
 
-        if ($role instanceof Role) {
+        if ($role instanceof Permission) {
             return $role;
         }
 
