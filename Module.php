@@ -39,7 +39,7 @@ class Module extends BaseModule {
     public $defaultRoute = 'admin/index';
 
     /** @var bool Whether to show flash messages. */
-    public $enableFlashMessages = true;
+    public $enableFlashMessages = false;
 
     /** @var bool Whether to enable registration. */
     public $enableRegistration = true;
@@ -129,7 +129,7 @@ class Module extends BaseModule {
         'forgot' => 'recovery/request',
         'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'recovery/reset',
         'settings/<action:\w+>' => 'settings/<action>',
-        'register' => 'registration/register'
+        'register' => 'registration/register',
     ];
 
 }

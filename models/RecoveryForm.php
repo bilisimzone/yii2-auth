@@ -179,7 +179,7 @@ class RecoveryForm extends Model {
         }
 
         if ($token->user->resetPassword($this->password)) {
-            \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Your password has been changed successfully.'));
+            \Yii::$app->session->setFlash('success', \Yii::t('auth', 'Your password has been changed successfully.').'  <a class="btn btn-sm btn-primary" href="'.\yii\helpers\Url::toRoute('/auth/login').'">'.\Yii::t('auth', 'Sign in').'</a>');
             $token->delete();
         } else {
             \Yii::$app->session->setFlash(

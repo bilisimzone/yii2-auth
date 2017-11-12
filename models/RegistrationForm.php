@@ -20,9 +20,13 @@ use yii\base\Model;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class RegistrationForm extends Model
-{
+class RegistrationForm extends Model {
+
     use ModuleTrait;
+
+    const SCENARIO_USERNAME_REQUIRED = 'usernameRequired';
+    const SCENARIO_USERNAME_NOT_REQUIRED = 'usernameNotRequired';
+
     /**
      * @var string User email address
      */
@@ -41,45 +45,53 @@ class RegistrationForm extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        $user = $this->module->modelMap['User'];
-
+    public function scenarios() {
         return [
-            // username rules
-            'usernameLength'   => ['username', 'string', 'min' => 3, 'max' => 255],
-            'usernameTrim'     => ['username', 'filter', 'filter' => 'trim'],
-            'usernamePattern'  => ['username', 'match', 'pattern' => $user::$usernameRegexp],
-            'usernameRequired' => ['username', 'required'],
-            'usernameUnique'   => [
-                'username',
-                'unique',
-                'targetClass' => $user,
-                'message' => Yii::t('auth', 'This username has already been taken')
-            ],
-            // email rules
-            'emailTrim'     => ['email', 'filter', 'filter' => 'trim'],
-            'emailRequired' => ['email', 'required'],
-            'emailPattern'  => ['email', 'email'],
-            'emailUnique'   => [
-                'email',
-                'unique',
-                'targetClass' => $user,
-                'message' => Yii::t('auth', 'This email address has already been taken')
-            ],
-            // password rules
-            'passwordRequired' => ['password', 'required', 'skipOnEmpty' => $this->module->enableGeneratingPassword],
-            'passwordLength'   => ['password', 'string', 'min' => 6, 'max' => 72],
+            self::SCENARIO_USERNAME_REQUIRED => ['email', 'username', 'password'],
+            self::SCENARIO_USERNAME_NOT_REQUIRED => ['email', 'password'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function rules() {
+        $user = $this->module->modelMap['User'];
+
         return [
-            'email'    => Yii::t('auth', 'Email'),
+            // email rules
+            'emailRequired' => ['email', 'required'],
+            'emailTrim' => ['email', 'filter', 'filter' => 'trim'],
+            'emailPattern' => ['email', 'email'],
+            'emailUnique' => [
+                'email',
+                'unique',
+                'targetClass' => $user,
+                'message' => Yii::t('auth', 'This email address has already been taken')
+            ],
+            // username rules
+            'usernameRequired' => ['username', 'required'],
+            'usernameLength' => ['username', 'string', 'min' => 3, 'max' => 255],
+            'usernameTrim' => ['username', 'filter', 'filter' => 'trim'],
+            'usernamePattern' => ['username', 'match', 'pattern' => $user::$usernameRegexp],
+            'usernameUnique' => [
+                'username',
+                'unique',
+                'targetClass' => $user,
+                'message' => Yii::t('auth', 'This username has already been taken')
+            ],
+            // password rules
+            'passwordRequired' => ['password', 'required', 'skipOnEmpty' => $this->module->enableGeneratingPassword],
+            'passwordLength' => ['password', 'string', 'min' => 6, 'max' => 72],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+        return [
+            'email' => Yii::t('auth', 'Email'),
             'username' => Yii::t('auth', 'Username'),
             'password' => Yii::t('auth', 'Password'),
         ];
@@ -88,8 +100,7 @@ class RegistrationForm extends Model
     /**
      * @inheritdoc
      */
-    public function formName()
-    {
+    public function formName() {
         return 'register-form';
     }
 
@@ -98,15 +109,17 @@ class RegistrationForm extends Model
      *
      * @return bool
      */
-    public function register()
-    {
+    public function register() {
         if (!$this->validate()) {
             return false;
         }
-
+        
         /** @var User $user */
         $user = Yii::createObject(User::className());
         $user->setScenario('register');
+        if($this->scenario===self::SCENARIO_USERNAME_NOT_REQUIRED){
+            $this->username = $user->generateUsername();
+        }
         $this->loadAttributes($user);
 
         if (!$user->register()) {
@@ -114,11 +127,9 @@ class RegistrationForm extends Model
         }
 
         Yii::$app->session->setFlash(
-            'info',
-            Yii::t(
-                'auth',
-                'Your account has been created and a message with further instructions has been sent to your email'
-            )
+                'info', Yii::t(
+                        'auth', 'Your account has been created and a message with further instructions has been sent to your email'
+                )
         );
 
         return true;
@@ -133,8 +144,7 @@ class RegistrationForm extends Model
      *
      * @param User $user
      */
-    protected function loadAttributes(User $user)
-    {
+    protected function loadAttributes(User $user) {
         $user->setAttributes($this->attributes);
     }
 }

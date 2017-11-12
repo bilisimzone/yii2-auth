@@ -124,7 +124,10 @@ use EventTrait;
         }
 
         /** @var RegistrationForm $model */
-        $model = \Yii::createObject(RegistrationForm::className());
+        $model = \Yii::createObject([
+                    'class' => RegistrationForm::className(),
+                    'scenario' => ($this->module->enableLoginWithUsernameOrEmail === true or $this->module->enableLoginWithUsername === true) ? RegistrationForm::SCENARIO_USERNAME_REQUIRED : RegistrationForm::SCENARIO_USERNAME_NOT_REQUIRED,
+        ]);
         $event = $this->getFormEvent($model);
 
         $this->trigger(self::EVENT_BEFORE_REGISTER, $event);

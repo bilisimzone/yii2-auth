@@ -19,6 +19,7 @@ use coreb2c\auth\traits\EventTrait;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\helpers\Url;
 
 /**
  * RecoveryController manages password recovery process.
@@ -27,10 +28,11 @@ use yii\web\NotFoundHttpException;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class RecoveryController extends Controller
-{
+class RecoveryController extends Controller {
+
     use AjaxValidationTrait;
-    use EventTrait;
+
+use EventTrait;
 
     /**
      * Event is triggered before requesting password reset.
@@ -77,15 +79,13 @@ class RecoveryController extends Controller
      * @param Finder           $finder
      * @param array            $config
      */
-    public function __construct($id, $module, Finder $finder, $config = [])
-    {
+    public function __construct($id, $module, Finder $finder, $config = []) {
         $this->finder = $finder;
         parent::__construct($id, $module, $config);
     }
 
     /** @inheritdoc */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -102,16 +102,15 @@ class RecoveryController extends Controller
      * @return string
      * @throws \yii\web\NotFoundHttpException
      */
-    public function actionRequest()
-    {
+    public function actionRequest() {
         if (!$this->module->enablePasswordRecovery) {
             throw new NotFoundHttpException();
         }
 
         /** @var RecoveryForm $model */
         $model = \Yii::createObject([
-            'class'    => RecoveryForm::className(),
-            'scenario' => RecoveryForm::SCENARIO_REQUEST,
+                    'class' => RecoveryForm::className(),
+                    'scenario' => RecoveryForm::SCENARIO_REQUEST,
         ]);
         $event = $this->getFormEvent($model);
 
@@ -120,15 +119,16 @@ class RecoveryController extends Controller
 
         if ($model->load(\Yii::$app->request->post()) && $model->sendRecoveryMessage()) {
             $this->trigger(self::EVENT_AFTER_REQUEST, $event);
-            return $this->render('/message', [
-                'title'  => \Yii::t('auth', 'Recovery message sent'),
-                'module' => $this->module,
-            ]);
+            return $this->refresh();
+//            return $this->render('/message', [
+//                        'title' => \Yii::t('auth', 'Recovery message sent'),
+//                        'module' => $this->module,
+//            ]);
         }
 
         return $this->render('request', [
-            'model' => $model,
-            'module' => $this->module,
+                    'model' => $model,
+                    'module' => $this->module,
         ]);
     }
 
@@ -141,8 +141,7 @@ class RecoveryController extends Controller
      * @return string
      * @throws \yii\web\NotFoundHttpException
      */
-    public function actionReset($id, $code)
-    {
+    public function actionReset($id, $code) {
         if (!$this->module->enablePasswordRecovery) {
             throw new NotFoundHttpException();
         }
@@ -156,19 +155,18 @@ class RecoveryController extends Controller
         if ($token === null || $token->isExpired || $token->user === null) {
             $this->trigger(self::EVENT_AFTER_TOKEN_VALIDATE, $event);
             \Yii::$app->session->setFlash(
-                'danger',
-                \Yii::t('auth', 'Recovery link is invalid or expired. Please try requesting a new one.')
+                    'danger', \Yii::t('auth', 'Recovery link is invalid or expired. Please try requesting a new one.')
             );
             return $this->render('/message', [
-                'title'  => \Yii::t('auth', 'Invalid or expired link'),
-                'module' => $this->module,
+                        'title' => \Yii::t('auth', 'Invalid or expired link'),
+                        'module' => $this->module,
             ]);
         }
 
         /** @var RecoveryForm $model */
         $model = \Yii::createObject([
-            'class'    => RecoveryForm::className(),
-            'scenario' => RecoveryForm::SCENARIO_RESET,
+                    'class' => RecoveryForm::className(),
+                    'scenario' => RecoveryForm::SCENARIO_RESET,
         ]);
         $event->setForm($model);
 
@@ -178,13 +176,14 @@ class RecoveryController extends Controller
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->resetPassword($token)) {
             $this->trigger(self::EVENT_AFTER_RESET, $event);
             return $this->render('/message', [
-                'title'  => \Yii::t('auth', 'Password has been changed'),
-                'module' => $this->module,
+                        'title' => \Yii::t('auth', 'Password has been changed'),
+                        'module' => $this->module,
             ]);
         }
 
         return $this->render('reset', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
+
 }

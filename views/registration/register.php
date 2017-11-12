@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Coreb2c project.
  *
@@ -14,10 +13,9 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var coreb2c\auth\models\User $model
+ * @var coreb2c\auth\models\RegistrationModel $model
  * @var coreb2c\auth\Module $module
  */
-
 $this->title = Yii::t('auth', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,16 +26,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
             </div>
             <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id' => 'registration-form',
-                    'enableAjaxValidation' => true,
-                    'enableClientValidation' => false,
-                ]); ?>
+                <?php
+                $form = ActiveForm::begin([
+                            'id' => 'registration-form',
+                            'enableAjaxValidation' => true,
+                            'enableClientValidation' => false,
+                ]);
+                ?>
 
-                <?= $form->field($model, 'email') ?>
-
-                <?= $form->field($model, 'username') ?>
-
+                    <?= $form->field($model, 'email') ?>
+                <?php if ($model->scenario===$model::SCENARIO_USERNAME_REQUIRED): ?>
+                    <?= $form->field($model, 'username') ?>
+                <?php endif; ?>
                 <?php if ($module->enableGeneratingPassword == false): ?>
                     <?= $form->field($model, 'password')->passwordInput() ?>
                 <?php endif ?>
