@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php } else { ?>
                         <?= $form->field($model, 'login', ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control', 'tabindex' => '1']]); ?>
                     <?php } ?>
-                <?php endif ?>
+                <?php endif ?>  
 
                 <?php if ($module->debug): ?>
                     <div class="alert alert-warning">
@@ -83,11 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '3']) ?>
 
-                <?=
-                Html::submitButton(
-                        Yii::t('auth', 'Sign in'), ['class' => 'btn btn-primary btn-block', 'tabindex' => '4']
-                )
-                ?>
+                <?= Html::submitButton(Yii::t('auth', 'Sign in'), ['class' => 'btn btn-primary btn-block', 'tabindex' => '4']) ?>
 
                 <?php ActiveForm::end(); ?>
             </div>

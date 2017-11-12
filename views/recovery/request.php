@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableClientValidation' => false,
                 ]); ?>
 
-                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
 
                 <?= Html::submitButton(Yii::t('auth', 'Continue'), ['class' => 'btn btn-primary btn-block']) ?><br>
 

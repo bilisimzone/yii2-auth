@@ -76,12 +76,6 @@ class LogoutController extends Controller
                     ['allow' => true, 'actions' => ['logout', 'auth'], 'roles' => ['@']],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
         ];
     }
 

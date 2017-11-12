@@ -128,6 +128,7 @@ class RecoveryController extends Controller
 
         return $this->render('request', [
             'model' => $model,
+            'module' => $this->module,
         ]);
     }
 

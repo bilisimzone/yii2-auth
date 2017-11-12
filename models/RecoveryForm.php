@@ -13,6 +13,8 @@ namespace coreb2c\auth\models;
 
 use coreb2c\auth\Finder;
 use coreb2c\auth\Mailer;
+use coreb2c\auth\traits\ModuleTrait;
+use Yii;
 use yii\base\Model;
 
 /**
@@ -20,15 +22,17 @@ use yii\base\Model;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class RecoveryForm extends Model
-{
+class RecoveryForm extends Model {
+
+    use ModuleTrait;
+
     const SCENARIO_REQUEST = 'request';
     const SCENARIO_RESET = 'reset';
 
     /**
      * @var string
      */
-    public $email;
+    public $login;
 
     /**
      * @var string
@@ -45,13 +49,15 @@ class RecoveryForm extends Model
      */
     protected $finder;
 
+    /** @var \coreb2c\auth\models\User */
+    protected $user;
+
     /**
      * @param Mailer $mailer
      * @param Finder $finder
      * @param array  $config
      */
-    public function __construct(Mailer $mailer, Finder $finder, $config = [])
-    {
+    public function __construct(Mailer $mailer, Finder $finder, $config = []) {
         $this->mailer = $mailer;
         $this->finder = $finder;
         parent::__construct($config);
@@ -60,10 +66,9 @@ class RecoveryForm extends Model
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'email'    => \Yii::t('auth', 'Email'),
+            'login' => (($this->module->enableLoginWithUsernameOrEmail === true) ? Yii::t('auth', 'Username or Email') : (($this->module->enableLoginWithUsernameOrEmail === false and $this->module->enableLoginWithEmail === true) ? Yii::t('auth', 'Email') : Yii::t('auth', 'Username'))),
             'password' => \Yii::t('auth', 'Password'),
         ];
     }
@@ -71,10 +76,9 @@ class RecoveryForm extends Model
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         return [
-            self::SCENARIO_REQUEST => ['email'],
+            self::SCENARIO_REQUEST => ['login'],
             self::SCENARIO_RESET => ['password'],
         ];
     }
@@ -82,15 +86,48 @@ class RecoveryForm extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-            'emailTrim' => ['email', 'filter', 'filter' => 'trim'],
-            'emailRequired' => ['email', 'required'],
-            'emailPattern' => ['email', 'email'],
+    public function rules() {
+        $user = $this->module->modelMap['User'];
+        $rules = [
+            'requiredFields' => [['login'], 'required'],
+            'loginTrim' => ['login', 'trim'],
+            'loginExistance' => [
+                'login',
+                function ($attribute) {
+                    if ($this->user === null) {
+                        $this->addError($attribute, Yii::t('auth', 'Invalid username'));
+                    }
+                }
+            ],
+            'confirmationValidate' => [
+                'login',
+                function ($attribute) {
+                    if ($this->user !== null) {
+                        $confirmationRequired = $this->module->enableConfirmation && !$this->module->enableUnconfirmedLogin;
+                        if ($confirmationRequired && !$this->user->getIsConfirmed()) {
+                            $this->addError($attribute, Yii::t('auth', 'You need to confirm your email address'));
+                        }
+                        if ($this->user->getIsBlocked()) {
+                            $this->addError($attribute, Yii::t('auth', 'Your account has been blocked'));
+                        }
+                    }
+                }
+            ],
             'passwordRequired' => ['password', 'required'],
             'passwordLength' => ['password', 'string', 'max' => 72, 'min' => 6],
         ];
+        if ($this->module->enableLoginWithUsernameOrEmail === false and $this->module->enableLoginWithEmail == true) {
+            $rules = array_merge($rules, [
+                'loginType' => [['login'], 'email']
+            ]);
+        }
+        if ($this->module->enableLoginWithUsernameOrEmail === false and $this->module->enableLoginWithEmail == false and $this->module->enableLoginWithUsername === true) {
+            $rules = array_merge($rules, [
+                'usernameLength' => ['login', 'string', 'min' => 3, 'max' => 255],
+                'usernamePattern' => ['login', 'match', 'pattern' => $user::$usernameRegexp],
+            ]);
+        }
+        return $rules;
     }
 
     /**
@@ -98,20 +135,19 @@ class RecoveryForm extends Model
      *
      * @return bool
      */
-    public function sendRecoveryMessage()
-    {
+    public function sendRecoveryMessage() {
         if (!$this->validate()) {
             return false;
         }
 
-        $user = $this->finder->findUserByEmail($this->email);
+        $user = $this->user;
 
         if ($user instanceof User) {
             /** @var Token $token */
             $token = \Yii::createObject([
-                'class' => Token::className(),
-                'user_id' => $user->id,
-                'type' => Token::TYPE_RECOVERY,
+                        'class' => Token::className(),
+                        'user_id' => $user->id,
+                        'type' => Token::TYPE_RECOVERY,
             ]);
 
             if (!$token->save(false)) {
@@ -124,8 +160,7 @@ class RecoveryForm extends Model
         }
 
         \Yii::$app->session->setFlash(
-            'info',
-            \Yii::t('auth', 'An email has been sent with instructions for resetting your password')
+                'info', \Yii::t('auth', 'An email has been sent with instructions for resetting your password')
         );
 
         return true;
@@ -138,8 +173,7 @@ class RecoveryForm extends Model
      *
      * @return bool
      */
-    public function resetPassword(Token $token)
-    {
+    public function resetPassword(Token $token) {
         if (!$this->validate() || $token->user === null) {
             return false;
         }
@@ -149,8 +183,7 @@ class RecoveryForm extends Model
             $token->delete();
         } else {
             \Yii::$app->session->setFlash(
-                'danger',
-                \Yii::t('auth', 'An error occurred and your password has not been changed. Please try again later.')
+                    'danger', \Yii::t('auth', 'An error occurred and your password has not been changed. Please try again later.')
             );
         }
 
@@ -160,8 +193,25 @@ class RecoveryForm extends Model
     /**
      * @inheritdoc
      */
-    public function formName()
-    {
+    public function formName() {
         return 'recovery-form';
     }
+
+    /** @inheritdoc */
+    public function beforeValidate() {
+        if (parent::beforeValidate()) {
+            if ($this->module->enableLoginWithUsernameOrEmail === true) {
+                $this->user = $this->finder->findUserByUsernameOrEmail(trim($this->login), $this->module->userCategory);
+            } elseif ($this->module->enableLoginWithEmail === true) {
+                $this->user = $this->finder->findUserByEmail(trim($this->login), $this->module->userCategory);
+            } else {
+                $this->user = $this->finder->findUserByUsername(trim($this->login), $this->module->userCategory);
+            }
+            
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
