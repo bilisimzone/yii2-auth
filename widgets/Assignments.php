@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * This file is part of the CoreB2C project
  * 
  * (c) CoreB2C project <http://github.com/coreb2c>
@@ -23,38 +23,37 @@ use yii\base\Widget;
  * 
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com>
  */
-class Assignments extends Widget
-{
+class Assignments extends Widget {
+
     /** @var integer ID of the user to whom auth items will be assigned. */
     public $userId;
-    
+
     /** @var DbManager */
     protected $manager;
-    
+
     /** @inheritdoc */
-    public function init()
-    {
+    public function init() {
         parent::init();
         $this->manager = Yii::$app->authManager;
         if ($this->userId === null) {
             throw new InvalidConfigException('You should set ' . __CLASS__ . '::$userId');
         }
     }
-    
+
     /** @inheritdoc */
-    public function run()
-    {
+    public function run() {
         $model = Yii::createObject([
-            'class'   => Assignment::className(),
-            'user_id' => $this->userId,
+                    'class' => Assignment::className(),
+                    'user_id' => $this->userId,
         ]);
-        
+
         if ($model->load(\Yii::$app->request->post())) {
             $model->updateAssignments();
         }
-        
+
         return $this->render('form', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
+
 }

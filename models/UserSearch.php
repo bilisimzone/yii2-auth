@@ -19,8 +19,8 @@ use yii\data\ActiveDataProvider;
 /**
  * UserSearch represents the model behind the search form about User.
  */
-class UserSearch extends Model
-{
+class UserSearch extends Model {
+
     /** @var string */
     public $username;
 
@@ -35,26 +35,27 @@ class UserSearch extends Model
 
     /** @var string */
     public $registration_ip;
-    
+
     /** @var string */
     public $category;
 
     /** @var Finder */
     protected $finder;
 
+    /** @var int Paging size */
+    public $pageSize = false;
+    
     /**
      * @param Finder $finder
      * @param array  $config
      */
-    public function __construct(Finder $finder, $config = [])
-    {
+    public function __construct(Finder $finder, $config = []) {
         $this->finder = $finder;
         parent::__construct($config);
     }
 
     /** @inheritdoc */
-    public function rules()
-    {
+    public function rules() {
         return [
             'fieldsSafe' => [['username', 'email', 'registration_ip', 'created_at', 'last_login_at', 'category'], 'safe'],
             'createdDefault' => ['created_at', 'default', 'value' => null],
@@ -63,15 +64,14 @@ class UserSearch extends Model
     }
 
     /** @inheritdoc */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'username'        => Yii::t('auth', 'Username'),
-            'email'           => Yii::t('auth', 'Email'),
-            'created_at'      => Yii::t('auth', 'Registration time'),
-            'last_login_at'   => Yii::t('auth', 'Last login'),
+            'username' => Yii::t('auth', 'Username'),
+            'email' => Yii::t('auth', 'Email'),
+            'created_at' => Yii::t('auth', 'Registration time'),
+            'last_login_at' => Yii::t('auth', 'Last login'),
             'registration_ip' => Yii::t('auth', 'Registration ip'),
-            'category'        => Yii::t('auth', 'Category'),
+            'category' => Yii::t('auth', 'Category'),
         ];
     }
 
@@ -80,12 +80,12 @@ class UserSearch extends Model
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = $this->finder->getUserQuery();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => (is_numeric($this->pageSize))?[ 'pageSize' => $this->pageSize]:false,
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -98,10 +98,11 @@ class UserSearch extends Model
         }
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'category', $this->category])
-            ->andFilterWhere(['registration_ip' => $this->registration_ip]);
+                ->andFilterWhere(['like', 'email', $this->email])
+                ->andFilterWhere(['like', 'category', $this->category])
+                ->andFilterWhere(['registration_ip' => $this->registration_ip]);
 
         return $dataProvider;
     }
+
 }

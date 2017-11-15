@@ -39,8 +39,8 @@ use yii\widgets\ActiveForm;
  *
  * @author Abdullah Tulek <abdullah.tulek@coreb2c.com
  */
-class AdminController extends Controller
-{
+class AdminController extends Controller {
+
     use EventTrait;
 
     /**
@@ -155,24 +155,22 @@ class AdminController extends Controller
      * @param Finder  $finder
      * @param array   $config
      */
-    public function __construct($id, $module, Finder $finder, $config = [])
-    {
+    public function __construct($id, $module, Finder $finder, $config = []) {
         $this->finder = $finder;
         parent::__construct($id, $module, $config);
     }
 
     /** @inheritdoc */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete'          => ['post'],
-                    'confirm'         => ['post'],
+                    'delete' => ['post'],
+                    'confirm' => ['post'],
                     'resend-password' => ['post'],
-                    'block'           => ['post'],
-                    'switch'          => ['post'],
+                    'block' => ['post'],
+                    'switch' => ['post'],
                 ],
             ],
             'access' => [
@@ -200,15 +198,22 @@ class AdminController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         Url::remember('', 'actions-redirect');
-        $searchModel  = \Yii::createObject(UserSearch::className());
+        $searchModel = \Yii::createObject(UserSearch::className());
+        $searchModel->pageSize = false;
+        
+        if (\Yii::$app->request->isAjax) {
+            $dataProvider = $searchModel->search(\Yii::$app->request->post());
+            return $this->renderPartial('index_ajax_1', [
+                        'dataProvider' => $dataProvider,
+                        'searchModel' => $searchModel,
+            ]);
+        }
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'searchModel'  => $searchModel,
+        return $this->render('index_1', [
+                    'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
         ]);
     }
 
@@ -218,12 +223,11 @@ class AdminController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         /** @var User $user */
         $user = \Yii::createObject([
-            'class'    => User::className(),
-            'scenario' => 'create',
+                    'class' => User::className(),
+                    'scenario' => 'create',
         ]);
         $user->loadDefaultValues();
         $event = $this->getUserEvent($user);
@@ -238,7 +242,7 @@ class AdminController extends Controller
         }
 
         return $this->render('create', [
-            'user' => $user,
+                    'user' => $user,
         ]);
     }
 
@@ -249,8 +253,7 @@ class AdminController extends Controller
      *
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         Url::remember('', 'actions-redirect');
         $user = $this->findModel($id);
         $user->scenario = 'update';
@@ -266,7 +269,7 @@ class AdminController extends Controller
         }
 
         return $this->render('_account', [
-            'user' => $user,
+                    'user' => $user,
         ]);
     }
 
@@ -277,10 +280,9 @@ class AdminController extends Controller
      *
      * @return mixed
      */
-    public function actionUpdateProfile($id)
-    {
+    public function actionUpdateProfile($id) {
         Url::remember('', 'actions-redirect');
-        $user    = $this->findModel($id);
+        $user = $this->findModel($id);
         $profile = $user->profile;
 
         if ($profile == null) {
@@ -300,8 +302,8 @@ class AdminController extends Controller
         }
 
         return $this->render('_profile', [
-            'user'    => $user,
-            'profile' => $profile,
+                    'user' => $user,
+                    'profile' => $profile,
         ]);
     }
 
@@ -312,13 +314,12 @@ class AdminController extends Controller
      *
      * @return string
      */
-    public function actionInfo($id)
-    {
+    public function actionInfo($id) {
         Url::remember('', 'actions-redirect');
         $user = $this->findModel($id);
 
         return $this->render('_info', [
-            'user' => $user,
+                    'user' => $user,
         ]);
     }
 
@@ -331,13 +332,12 @@ class AdminController extends Controller
      *
      * @return string
      */
-    public function actionSwitch($id = null)
-    {
+    public function actionSwitch($id = null) {
         if (!$this->module->enableImpersonateUser) {
             throw new ForbiddenHttpException(Yii::t('auth', 'Impersonate user is disabled in the application configuration'));
         }
 
-        if(!$id && Yii::$app->session->has(self::ORIGINAL_USER_SESSION_KEY)) {
+        if (!$id && Yii::$app->session->has(self::ORIGINAL_USER_SESSION_KEY)) {
             $user = $this->findModel(Yii::$app->session->get(self::ORIGINAL_USER_SESSION_KEY));
 
             Yii::$app->session->remove(self::ORIGINAL_USER_SESSION_KEY);
@@ -353,9 +353,9 @@ class AdminController extends Controller
         $event = $this->getUserEvent($user);
 
         $this->trigger(self::EVENT_BEFORE_IMPERSONATE, $event);
-        
+
         Yii::$app->user->switchIdentity($user, 3600);
-        
+
         $this->trigger(self::EVENT_AFTER_IMPERSONATE, $event);
 
         return $this->goHome();
@@ -370,8 +370,7 @@ class AdminController extends Controller
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionAssignments($id)
-    {
+    public function actionAssignments($id) {
         if (!isset(\Yii::$app->extensions['coreb2c/yii2-auth'])) {
             throw new NotFoundHttpException();
         }
@@ -379,7 +378,7 @@ class AdminController extends Controller
         $user = $this->findModel($id);
 
         return $this->render('_assignments', [
-            'user' => $user,
+                    'user' => $user,
         ]);
     }
 
@@ -390,8 +389,7 @@ class AdminController extends Controller
      *
      * @return Response
      */
-    public function actionConfirm($id)
-    {
+    public function actionConfirm($id) {
         $model = $this->findModel($id);
         $event = $this->getUserEvent($model);
 
@@ -412,8 +410,7 @@ class AdminController extends Controller
      *
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         if ($id == \Yii::$app->user->getId()) {
             \Yii::$app->getSession()->setFlash('danger', \Yii::t('auth', 'You can not remove your own account'));
         } else {
@@ -435,12 +432,11 @@ class AdminController extends Controller
      *
      * @return Response
      */
-    public function actionBlock($id)
-    {
+    public function actionBlock($id) {
         if ($id == \Yii::$app->user->getId()) {
             \Yii::$app->getSession()->setFlash('danger', \Yii::t('auth', 'You can not block your own account'));
         } else {
-            $user  = $this->findModel($id);
+            $user = $this->findModel($id);
             $event = $this->getUserEvent($user);
             if ($user->getIsBlocked()) {
                 $this->trigger(self::EVENT_BEFORE_UNBLOCK, $event);
@@ -463,8 +459,7 @@ class AdminController extends Controller
      *
      * @return Response
      */
-    public function actionResendPassword($id)
-    {
+    public function actionResendPassword($id) {
         $user = $this->findModel($id);
         if ($user->isAdmin) {
             throw new ForbiddenHttpException(Yii::t('auth', 'Password generation is not possible for admin users'));
@@ -488,8 +483,7 @@ class AdminController extends Controller
      * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         $user = $this->finder->findUserById($id);
         if ($user === null) {
             throw new NotFoundHttpException('The requested page does not exist');
@@ -505,8 +499,7 @@ class AdminController extends Controller
      *
      * @throws ExitException
      */
-    protected function performAjaxValidation($model)
-    {
+    protected function performAjaxValidation($model) {
         if (\Yii::$app->request->isAjax && !\Yii::$app->request->isPjax) {
             if ($model->load(\Yii::$app->request->post())) {
                 \Yii::$app->response->format = Response::FORMAT_JSON;
@@ -515,4 +508,5 @@ class AdminController extends Controller
             }
         }
     }
+
 }
