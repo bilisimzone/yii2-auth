@@ -201,17 +201,17 @@ class AdminController extends Controller {
     public function actionIndex() {
         Url::remember('', 'actions-redirect');
         $searchModel = \Yii::createObject(UserSearch::className());
-        $searchModel->pageSize = false;
+        $searchModel->pageSize = 5;
         
         if (\Yii::$app->request->isAjax) {
             $dataProvider = $searchModel->search(\Yii::$app->request->post());
-            return $this->renderPartial('index_ajax_1', [
+            return $this->renderPartial('index_ajax', [
                         'dataProvider' => $dataProvider,
                         'searchModel' => $searchModel,
             ]);
         }
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
-        return $this->render('index_1', [
+        return $this->render('index', [
                     'dataProvider' => $dataProvider,
                     'searchModel' => $searchModel,
         ]);
