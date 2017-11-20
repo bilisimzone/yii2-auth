@@ -25,7 +25,7 @@ class FrontendFilter extends ActionFilter {
     /**
      * @var array
      */
-    public $controllers = ['admin'];
+    public $controllers = ['admin', 'rbac/role', 'rbac/permission', 'rbac/rule'];
 
     /**
      * @param \yii\base\Action $action
