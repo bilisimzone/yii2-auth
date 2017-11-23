@@ -11,7 +11,7 @@
 
 namespace coreb2c\auth\controllers\rbac;
 
-use yii\auth\Role;
+use yii\rbac\Role;
 use yii\web\NotFoundHttpException;
 use yii\rbac\Item;
 
@@ -29,7 +29,6 @@ class RoleController extends ItemControllerAbstract
     protected function getItem($name)
     {
         $role = \Yii::$app->authManager->getRole($name);
-
         if ($role instanceof Role) {
             return $role;
         }

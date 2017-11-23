@@ -107,7 +107,6 @@ abstract class ItemControllerAbstract extends Controller
             'scenario' => 'update',
             'item'     => $item,
         ]);
-
         $this->performAjaxValidation($model);
 
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
