@@ -130,6 +130,8 @@ class Module extends BaseModule {
         'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'recovery/reset',
         'settings/<action:\w+>' => 'settings/<action>',
         'register' => 'registration/register',
+        'admin/<action:(update|delete|resend-password|switch|block)>/<id:\d+>' => 'admin/<action>',
+        'rbac/<controller:(role|permission|rule)>/<action:(update|delete)>/<name:\w+>' => 'rbac/<controller>/<action>',
     ];
 
 }
