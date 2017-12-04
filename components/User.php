@@ -31,7 +31,7 @@ class User extends \yii\web\User {
      * @return bool whether the user can perform the operation as specified by the given permission.
      */
     public function can($permissionName, $params = [], $allowCaching = true) {
-        if (\Yii::$app->user->identity->isAdmin) {
+        if (\Yii::$app->user->isGuest===false && \Yii::$app->user->identity->isAdmin) {
             return true;
         }
         return parent::can($permissionName, $params, $allowCaching);
