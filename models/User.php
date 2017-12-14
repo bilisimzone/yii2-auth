@@ -281,7 +281,7 @@ class User extends ActiveRecord implements IdentityInterface {
 
             $this->confirm();
             if ($this->emailAccountDetails) {
-                $this->mailer->sendWelcomeMessage($this, null, true);
+//                $this->mailer->sendWelcomeMessage($this, null, true);
             }
             $this->trigger(self::AFTER_CREATE);
 

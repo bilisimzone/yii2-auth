@@ -19,7 +19,10 @@
  */
 return [
     ''=>'',
-    ''=>'',
+    'New password will be generated and sent to user. Are you sure?'=>'Yeni şifre oluşturulacak ve kullanıcıya gönderilecek. Emin misiniz?',
+    'New Password has been generated and sent to user'=>'Yeni şifre oluşturuldu ve kullanıcıya gönderildi',
+    'Your password on {0} has been changed'=>'{0} şifreniz değişti',
+    'Your account on {0} has a new password'=>'{0} hesabınızın yeni bir şifresi var',
     'We have generated a password for you'=>'Sizin için şifre oluşturduk',
     'Your login credentials are as below'=>'Giriş bilgileriniz aşağıdaki gibidir',
     'Email login credentials?'=>'Giriş bilgilerini eposta ile gönder',
@@ -228,7 +231,7 @@ return [
     'This account has already been connected to another user' => 'Bu hesapla başka bir kullanıcı için daha önce giriş yapılmış',
     'This email address has already been taken' => 'Bu eposta adresi daha önce alınmış',
     'This username has already been taken' => 'Bu kullanıcı adı daha önce alınmış',
-    'Unblock' => 'Bloku Kaldır',
+    'Unblock' => 'Engeli Kaldır',
     'Update user account' => 'Kullanıcı hesabını güncelle',
     'User has been blocked' => 'Kullanıcı engellendi',
     'User has been confirmed' => 'Kullanıcı doğrulandı',
